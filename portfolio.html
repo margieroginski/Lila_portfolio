@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Design Portfolio</title>
+<title>Lila Roginski — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,7 +55,6 @@
     align-items: center;
   }
 
-  /* Background blobs */
   .hero-blobs {
     position: absolute; inset: 0; pointer-events: none; z-index: 0;
   }
@@ -69,7 +68,6 @@
   .blob-3 { width: 180px; height: 180px; top: 15%; left: 42%; }
   .blob-4 { width: 260px; height: 260px; top: 5%; right: 3%; border-radius: 50% 30% 50% 30%; }
 
-  /* Photo frame */
   .hero-photo {
     position: absolute;
     right: 6%;
@@ -92,7 +90,7 @@
   }
 
   .hero-content { position: relative; z-index: 3; max-width: 580px; }
-  
+
   .hero-eyebrow {
     font-family: 'Syne', sans-serif;
     font-size: 0.75rem; font-weight: 700;
@@ -205,6 +203,21 @@
     gap: 1.5rem;
   }
 
+  /* Category breaks inside grid */
+  .category-break {
+    grid-column: 1 / -1;
+    padding: 2.5rem 0 0.75rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(26,24,20,0.1);
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .category-break:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  .category-name {
+    font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: #888;
+  }
+  .category-count { font-family: 'Syne', sans-serif; font-size: 0.7rem; color: #bbb; }
+
   /* Project Cards */
   .project-card {
     border-radius: 20px;
@@ -214,6 +227,7 @@
     position: relative;
   }
   .project-card:hover { transform: translateY(-6px) scale(1.01); }
+  .card-wide { grid-column: span 2; }
 
   .card-visual {
     height: 280px;
@@ -244,125 +258,110 @@
     margin-bottom: 0.35rem;
   }
   .card-sub { font-size: 0.85rem; color: #7A776F; line-height: 1.5; }
+  .card-metrics { font-size: 0.75rem; color: #A8A29A; margin-top: 0.5rem; line-height: 1.5; }
 
-  /* ══ CARD 1: Chewy ══ */
-  .card-chewy .card-visual { background: var(--chewy-blue); }
-  .chewy-scene {
-    width: 100%; height: 100%;
-    position: relative;
+  /* ── VIDEO CARDS ── */
+  .card-video .card-visual { background: #0D0D0D; }
+  .video-play-btn {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: rgba(232,216,75,0.9);
     display: flex; align-items: center; justify-content: center;
-  }
-
-  /* animated sun rays */
-  .chewy-rays {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .chewy-rays svg { width: 280px; height: 280px; opacity: 0.15; animation: spin 30s linear infinite; }
-
-  .chewy-box {
+    transition: transform 0.2s, background 0.2s;
     position: relative; z-index: 2;
-    width: 120px; height: 100px;
+    flex-shrink: 0;
   }
-  .chewy-box svg { width: 100%; height: 100%; }
-
-  .chewy-pets {
-    position: absolute; z-index: 3;
-    bottom: 20px; width: 100%;
-    display: flex; justify-content: space-around; padding: 0 20px;
+  .project-card:hover .video-play-btn { transform: scale(1.1); background: var(--yellow); }
+  .video-glow {
+    position: absolute;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(232,216,75,0.08) 0%, transparent 70%);
+    border-radius: 50%;
   }
 
-  /* ══ CARD 2: Branding ══ */
-  .card-brand .card-visual { background: #2A1F3D; }
-  .brand-scene {
+  /* ── NEWSLETTER CARDS ── */
+  .card-newsletter .card-visual { background: #F7F3EC; }
+  .newsletter-scene {
+    width: 100%; height: 100%;
+    padding: 1.75rem 1.5rem 1.25rem;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    position: relative; overflow: hidden;
+  }
+  .newsletter-top-bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--yellow), var(--yellow-dark));
+  }
+  .newsletter-from {
+    font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #B0A898;
+    display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.85rem;
+  }
+  .newsletter-avatar {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ink); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .newsletter-subject {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem; color: var(--ink); line-height: 1.35;
+    margin-bottom: 1rem; flex: 1;
+  }
+  .newsletter-lines { display: flex; flex-direction: column; gap: 5px; }
+  .nl-line { height: 5px; background: #E0DBD0; border-radius: 3px; }
+
+  /* ── LINKEDIN CARDS ── */
+  .card-linkedin .card-visual { background: #0A66C2; }
+  .linkedin-scene {
+    width: 100%; height: 100%;
+    padding: 1.5rem;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .linkedin-watermark {
+    position: absolute; bottom: -10px; right: 0;
+    font-family: 'Syne', sans-serif; font-size: 9rem; font-weight: 800;
+    color: rgba(255,255,255,0.05); line-height: 1; user-select: none;
+  }
+  .linkedin-profile {
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.25rem;
+  }
+  .linkedin-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.25); flex-shrink: 0;
+  }
+  .linkedin-name-line { height: 7px; background: rgba(255,255,255,0.45); border-radius: 3px; width: 90px; margin-bottom: 4px; }
+  .linkedin-role-line { height: 5px; background: rgba(255,255,255,0.2); border-radius: 3px; width: 55px; }
+  .linkedin-text-lines { display: flex; flex-direction: column; gap: 6px; }
+  .li-line { height: 6px; background: rgba(255,255,255,0.28); border-radius: 3px; }
+
+  /* ── LUMA CARDS ── */
+  .card-luma .card-visual { background: #2D1B69; }
+  .card-luma-green .card-visual { background: #1A3D2B; }
+  .luma-scene {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
   }
-  .brand-circle {
-    border-radius: 50%;
+  .luma-glow {
     position: absolute;
-  }
-
-  /* ══ CARD 3: Web Design ══ */
-  .card-web .card-visual { background: #F0EBE3; }
-  .web-scene {
-    width: 100%; height: 100%;
-    display: flex; align-items: flex-end; justify-content: center;
-    padding-bottom: 0;
-    position: relative;
-  }
-  .web-mockup {
-    width: 200px;
-    background: white;
-    border-radius: 12px 12px 0 0;
-    overflow: hidden;
-    box-shadow: 0 -8px 40px rgba(0,0,0,0.12);
-  }
-  .web-bar { height: 28px; background: #1A1814; display: flex; align-items: center; gap: 6px; padding: 0 12px; }
-  .web-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .web-body { padding: 12px; }
-  .web-line { height: 6px; border-radius: 3px; background: #E8E4DC; margin-bottom: 8px; }
-  .web-line.short { width: 60%; }
-  .web-line.shorter { width: 40%; }
-  .web-hero-img { height: 50px; background: #E8D84B; border-radius: 6px; margin-bottom: 8px; }
-
-  /* ══ CARD 4: Motion / wide ══ */
-  .card-motion {
-    grid-column: span 2;
-  }
-  .card-motion .card-visual { height: 220px; background: #0D0D0D; }
-  .motion-scene {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden; gap: 16px;
-  }
-  .motion-ring {
+    width: 260px; height: 260px;
     border-radius: 50%;
-    border: 2px solid rgba(232,216,75,0.5);
-    position: absolute;
-    animation: pulse-ring 3s ease-out infinite;
   }
-  .motion-text {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.5rem; color: white; z-index: 2;
-    letter-spacing: -0.03em;
-    animation: flicker 6s ease-in-out infinite;
-  }
-  .motion-accent { color: var(--yellow); font-style: italic; }
-  @keyframes pulse-ring {
-    0% { transform: scale(0.6); opacity: 0.8; }
-    100% { transform: scale(2); opacity: 0; }
-  }
-  @keyframes flicker {
-    0%, 95%, 100% { opacity: 1; }
-    96% { opacity: 0.6; }
-    98% { opacity: 0.9; }
-  }
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .luma-glow-purple { background: radial-gradient(circle, rgba(160,120,255,0.18) 0%, transparent 70%); }
+  .luma-glow-green { background: radial-gradient(circle, rgba(80,200,120,0.18) 0%, transparent 70%); }
 
-  /* ══ CARD 5: Photography ══ */
-  .card-photo .card-visual { background: #8B7355; }
-  .photo-scene {
-    width: 100%; height: 100%;
-    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-    gap: 3px; padding: 3px;
-  }
-  .photo-swatch { border-radius: 6px; }
-
-  /* ── CHEWY MODAL / DETAIL ── */
+  /* ── MODAL ── */
   .modal-overlay {
     display: none;
     position: fixed; inset: 0; z-index: 200;
-    background: rgba(10,8,6,0.75);
+    background: rgba(10,8,6,0.82);
     backdrop-filter: blur(4px);
     align-items: center; justify-content: center;
   }
   .modal-overlay.open { display: flex; }
   .modal {
     background: var(--cream);
-    width: min(920px, 95vw);
-    max-height: 90vh;
+    width: min(860px, 95vw);
+    max-height: 92vh;
     border-radius: 24px;
     overflow-y: auto;
     position: relative;
@@ -376,66 +375,33 @@
     position: sticky; top: 1.5rem;
     float: right; margin: 1.5rem 1.5rem 0 0;
     width: 40px; height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: var(--ink);
-    color: var(--cream);
-    font-size: 1.1rem;
-    cursor: pointer;
+    border-radius: 50%; border: none;
+    background: var(--ink); color: var(--cream);
+    font-size: 1.1rem; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
-    z-index: 10;
+    transition: background 0.2s; z-index: 10;
   }
   .modal-close:hover { background: #333; }
-
-  .modal-hero {
-    height: 340px;
-    background: var(--chewy-blue);
-    border-radius: 24px 24px 0 0;
-    position: relative; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
+  .modal-video-wrap {
+    padding: 1.5rem 2rem 0;
+    clear: both;
   }
-
-  .ad-container {
-    display: flex; gap: 2rem; align-items: flex-start;
-    padding: 3rem;
-    flex-wrap: wrap;
+  #modal-video {
+    width: 100%; border-radius: 12px; background: black;
+    display: block; max-height: 60vh;
   }
-
-  .ad-square {
-    width: 280px; height: 280px;
-    border-radius: 16px;
-    overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 0 16px 48px rgba(28,73,194,0.25);
-  }
-  .ad-story {
-    width: 157px; height: 280px;
-    border-radius: 16px;
-    overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 0 16px 48px rgba(28,73,194,0.25);
-  }
-
-  .modal-info { flex: 1; min-width: 240px; }
-  .modal-brand {
+  .modal-video-info { padding: 1.5rem 2rem 2rem; }
+  .modal-video-label {
     font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
     letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--chewy-blue); margin-bottom: 0.5rem;
+    color: #888; margin-bottom: 0.5rem;
   }
-  .modal-title {
+  .modal-video-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 2rem; letter-spacing: -0.02em;
-    margin-bottom: 1rem;
+    font-size: 1.75rem; letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
   }
-  .modal-body { font-size: 0.95rem; line-height: 1.75; color: #5A574F; margin-bottom: 1.5rem; }
-  .modal-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .pill {
-    font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 5px 14px; border-radius: 20px;
-    background: rgba(28,73,194,0.1); color: var(--chewy-blue);
-  }
+  .modal-video-desc { font-size: 0.95rem; line-height: 1.75; color: #5A574F; }
 
   /* ── ABOUT ── */
   .about {
@@ -502,11 +468,15 @@
     .hero { grid-template-columns: 1fr; }
     .hero-photo { display: none; }
     .projects-grid { grid-template-columns: 1fr 1fr; }
-    .card-motion { grid-column: span 2; }
+    .card-wide { grid-column: span 2; }
     .about { grid-template-columns: 1fr; }
     nav { padding: 1rem 1.5rem; }
     .work, .about { padding: 4rem 1.5rem; }
     .hero { padding: 6rem 1.5rem 3rem; }
+  }
+  @media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .card-wide { grid-column: span 1; }
   }
 </style>
 </head>
@@ -514,11 +484,12 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">your name.</span>
+  <span class="nav-logo">Lila Roginski.</span>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="mailto:hello@yourname.com">Contact</a></li>
+    <!-- PLACEHOLDER: review this — update with Lila's real email -->
+    <li><a href="mailto:lila@example.com">Contact</a></li>
   </ul>
 </nav>
 
@@ -536,14 +507,17 @@
   </div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">Creative Designer &amp; Art Director</p>
+    <!-- PLACEHOLDER: review this — update title/role -->
+    <p class="hero-eyebrow">Business Development Manager &amp; Content Creator</p>
     <h1 class="hero-title">
-      Take your brand's <em>visual</em><br>
-      story to the<br>
-      <span class="accent-word">next level</span>
+      <!-- PLACEHOLDER: review this — update hero headline -->
+      Building <em>community</em><br>
+      around what<br>
+      <span class="accent-word">matters most</span>
     </h1>
+    <!-- PLACEHOLDER: review this — update hero body copy -->
     <p class="hero-body">
-      I'm a creative designer with 8+ years helping brands build identities that people actually remember. From campaign concepts to digital experiences — I craft work that connects.
+      I'm Lila Roginski — a business development manager and content creator in the sustainability space. I grow audiences, produce video, and turn ideas into events people actually show up for.
     </p>
     <a href="#work" class="hero-cta">
       View my work
@@ -555,18 +529,18 @@
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-inner">
-    <span class="ticker-item">Brand Identity <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Campaign Design <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Social Media Ads <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Art Direction <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Illustration <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Motion Design <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Brand Identity <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Campaign Design <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Social Media Ads <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Art Direction <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Illustration <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Motion Design <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Newsletter Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">LinkedIn Growth <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Video Production <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Event Management <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Community Building <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Content Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Newsletter Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">LinkedIn Growth <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Video Production <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Event Management <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Community Building <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Content Strategy <span class="ticker-dot">✦</span></span>
   </div>
 </div>
 
@@ -577,171 +551,487 @@
       <p class="section-label">Selected work</p>
       <h2 class="section-title">Recent projects</h2>
     </div>
-    <span class="section-count">05 projects</span>
+    <span class="section-count">16 pieces</span>
   </div>
 
   <div class="projects-grid">
 
-    <!-- CARD 1: CHEWY -->
-    <div class="project-card card-chewy" onclick="openModal('chewy')" role="button" tabindex="0" aria-label="View Chewy Organic Campaign">
+    <!-- ══════════════ VIDEOS ══════════════ -->
+    <div class="category-break">
+      <span class="category-name">Videos</span>
+      <span class="category-count">05</span>
+    </div>
+
+    <!-- VIDEO 1: Intro (wide) -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-video card-wide" onclick="openVideo('Sustainability Creatives Introductory Video.mp4', 'Sustainability Creatives: Who We Are', 'An introductory video for the Sustainability Creatives community — covering who we are, what we do, and why it matters.')" role="button" tabindex="0" aria-label="Play Sustainability Creatives introductory video">
       <div class="card-visual">
-        <div class="chewy-scene">
-          <div class="chewy-rays">
-            <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
-              <g transform="translate(140,140)">
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(30)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(60)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(90)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(120)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(150)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(180)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(210)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(240)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(270)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(300)"/>
-                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(330)"/>
-              </g>
-            </svg>
-          </div>
-          <!-- Chewy Subscription Box SVG -->
-          <svg width="130" height="120" viewBox="0 0 130 120" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:2">
-            <!-- Box body -->
-            <rect x="15" y="40" width="100" height="75" rx="6" fill="white"/>
-            <!-- Box flap -->
-            <path d="M15 40 L65 15 L115 40 Z" fill="#E8E0D0"/>
-            <!-- Chewy logo area -->
-            <rect x="35" y="60" width="60" height="28" rx="4" fill="#1C49C2"/>
-            <text x="65" y="80" text-anchor="middle" font-family="'Syne',sans-serif" font-size="11" font-weight="800" fill="white">chewy</text>
-            <!-- Leaf decoration -->
-            <path d="M40 95 Q50 82 60 95 Q50 100 40 95Z" fill="#4A8C3F"/>
-            <path d="M68 95 Q78 82 88 95 Q78 100 68 95Z" fill="#4A8C3F"/>
-            <!-- Paw print -->
-            <circle cx="65" cy="108" r="3" fill="#C8A84B"/>
-            <circle cx="59" cy="104" r="2" fill="#C8A84B"/>
-            <circle cx="71" cy="104" r="2" fill="#C8A84B"/>
-          </svg>
-          <!-- Dog SVG -->
-          <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:14px;left:16px;z-index:3">
-            <circle cx="30" cy="24" r="14" fill="#F5C57A"/>
-            <ellipse cx="20" cy="18" rx="6" ry="10" fill="#E8A850" transform="rotate(-20,20,18)"/>
-            <ellipse cx="40" cy="18" rx="6" ry="10" fill="#E8A850" transform="rotate(20,40,18)"/>
-            <circle cx="26" cy="22" r="3" fill="white"/><circle cx="34" cy="22" r="3" fill="white"/>
-            <circle cx="27" cy="22" r="1.5" fill="#1A1814"/><circle cx="35" cy="22" r="1.5" fill="#1A1814"/>
-            <ellipse cx="30" cy="27" rx="4" ry="2.5" fill="#E8936A"/>
-            <path d="M27 29 Q30 32 33 29" stroke="#1A1814" stroke-width="1.2" fill="none"/>
-            <rect x="18" y="36" width="24" height="20" rx="8" fill="#F5C57A"/>
-            <line x1="26" y1="36" x2="23" y2="56" stroke="#E8A850" stroke-width="5" stroke-linecap="round"/>
-            <line x1="34" y1="36" x2="37" y2="56" stroke="#E8A850" stroke-width="5" stroke-linecap="round"/>
-          </svg>
-          <!-- Cat SVG -->
-          <svg width="55" height="55" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:16px;right:16px;z-index:3">
-            <circle cx="27" cy="22" r="13" fill="#E8D5B0"/>
-            <path d="M16 12 L13 2 L22 10 Z" fill="#D4C09A"/>
-            <path d="M38 12 L42 2 L33 10 Z" fill="#D4C09A"/>
-            <circle cx="23" cy="20" r="3" fill="white"/><circle cx="31" cy="20" r="3" fill="white"/>
-            <circle cx="24" cy="20" r="1.5" fill="#1A1814"/><circle cx="32" cy="20" r="1.5" fill="#1A1814"/>
-            <circle cx="27" cy="24" r="2" fill="#E8936A"/>
-            <path d="M23 26 Q27 29 31 26" stroke="#1A1814" stroke-width="1.2" fill="none"/>
-            <line x1="14" y1="24" x2="22" y2="24" stroke="#999" stroke-width="0.8"/>
-            <line x1="33" y1="24" x2="41" y2="24" stroke="#999" stroke-width="0.8"/>
-            <rect x="16" y="33" width="22" height="18" rx="8" fill="#E8D5B0"/>
-            <path d="M36 38 Q45 35 44 50 Q38 48 36 38Z" fill="#D4C09A"/>
-            <line x1="24" y1="33" x2="22" y2="51" stroke="#D4C09A" stroke-width="4" stroke-linecap="round"/>
-            <line x1="30" y1="33" x2="32" y2="51" stroke="#D4C09A" stroke-width="4" stroke-linecap="round"/>
+        <div class="video-glow"></div>
+        <div class="video-play-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px">
+            <polygon points="4,2 18,11 4,20" fill="#1A1814"/>
           </svg>
         </div>
       </div>
       <div class="card-meta">
         <div class="card-tags">
-          <span class="tag" style="background:#E6EDF9;color:#1C49C2">Chewy</span>
-          <span class="tag">Social Ads</span>
-          <span class="tag">Campaign</span>
+          <span class="tag" style="background:#1A1814;color:#E8D84B">Video</span>
+          <span class="tag">Brand</span>
+          <span class="tag">Intro</span>
         </div>
-        <p class="card-name">Organic Subscription Campaign</p>
-        <p class="card-sub">Social media ads for Chewy's new organic pet food box launch</p>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Sustainability Creatives: Who We Are</p>
+        <p class="card-sub">An introductory video for the Sustainability Creatives community — covering who we are, what we do, and why it matters.</p>
       </div>
     </div>
 
-    <!-- CARD 2: Brand Identity -->
-    <div class="project-card card-brand">
+    <!-- VIDEO 2: Trailer -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-video" onclick="openVideo('InterviewProgramTrailer.mp4', 'Interview Program: Official Trailer', 'A short trailer spotlighting the Sustainability Creatives Interview Program — designed to help members land sustainability roles.')" role="button" tabindex="0" aria-label="Play Interview Program trailer">
       <div class="card-visual">
-        <div class="brand-scene">
-          <div class="brand-circle" style="width:200px;height:200px;background:rgba(232,216,75,0.15);"></div>
-          <div class="brand-circle" style="width:140px;height:140px;background:rgba(232,216,75,0.2);"></div>
-          <div class="brand-circle" style="width:80px;height:80px;background:#E8D84B;"></div>
-          <svg width="160" height="80" viewBox="0 0 160 80" style="position:absolute;z-index:2" xmlns="http://www.w3.org/2000/svg">
-            <text x="80" y="30" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="22" fill="white" font-style="italic">Lumière</text>
-            <text x="80" y="52" text-anchor="middle" font-family="'Syne',sans-serif" font-size="8" fill="rgba(255,255,255,0.5)" letter-spacing="5">STUDIO</text>
-            <line x1="30" y1="62" x2="130" y2="62" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-            <text x="80" y="74" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7" fill="rgba(255,255,255,0.3)" letter-spacing="3">EST. MMXXIII</text>
+        <div class="video-glow"></div>
+        <div class="video-play-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px">
+            <polygon points="4,2 18,11 4,20" fill="#1A1814"/>
           </svg>
         </div>
       </div>
       <div class="card-meta">
-        <div class="card-tags"><span class="tag">Branding</span><span class="tag">Identity</span></div>
-        <p class="card-name">Lumière Studio</p>
-        <p class="card-sub">Full brand identity system for a luxury photography studio</p>
+        <div class="card-tags">
+          <span class="tag" style="background:#1A1814;color:#E8D84B">Video</span>
+          <span class="tag">Trailer</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Interview Program: Trailer</p>
+        <p class="card-sub">A short trailer spotlighting the Interview Program — designed to help members land sustainability roles.</p>
       </div>
     </div>
 
-    <!-- CARD 3: Web Design -->
-    <div class="project-card card-web">
+    <!-- VIDEO 3: Day 1 -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-video" onclick="openVideo('InterviewProgramDay1.mp4', 'Interview Program: Day One', 'Day one of the Interview Program series — covering foundations, first impressions, and how to tell your sustainability story.')" role="button" tabindex="0" aria-label="Play Interview Program Day 1">
       <div class="card-visual">
-        <div class="web-scene">
-          <div class="web-mockup">
-            <div class="web-bar">
-              <div class="web-dot" style="background:#FF6B6B"></div>
-              <div class="web-dot" style="background:#FFD93D"></div>
-              <div class="web-dot" style="background:#6BCB77"></div>
+        <div class="video-glow"></div>
+        <div class="video-play-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px">
+            <polygon points="4,2 18,11 4,20" fill="#1A1814"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#1A1814;color:#E8D84B">Video</span>
+          <span class="tag">Interview Program</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Interview Program: Day One</p>
+        <p class="card-sub">Foundations, first impressions, and how to tell your sustainability story.</p>
+      </div>
+    </div>
+
+    <!-- VIDEO 4: Day 2 -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-video" onclick="openVideo('InterviewProgramDay2.mp4', 'Interview Program: Day Two', 'Day two dives into technical interview prep, portfolio walkthroughs, and common pitfalls to avoid.')" role="button" tabindex="0" aria-label="Play Interview Program Day 2">
+      <div class="card-visual">
+        <div class="video-glow"></div>
+        <div class="video-play-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px">
+            <polygon points="4,2 18,11 4,20" fill="#1A1814"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#1A1814;color:#E8D84B">Video</span>
+          <span class="tag">Interview Program</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Interview Program: Day Two</p>
+        <p class="card-sub">Technical prep, portfolio walkthroughs, and common interview pitfalls to avoid.</p>
+      </div>
+    </div>
+
+    <!-- VIDEO 5: Day 3 -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-video" onclick="openVideo('InterviewProgramDay3.mp4', 'Interview Program: Day Three', 'The final day covers negotiation, follow-up strategy, and how to convert interviews into offers in the sustainability sector.')" role="button" tabindex="0" aria-label="Play Interview Program Day 3">
+      <div class="card-visual">
+        <div class="video-glow"></div>
+        <div class="video-play-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px">
+            <polygon points="4,2 18,11 4,20" fill="#1A1814"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#1A1814;color:#E8D84B">Video</span>
+          <span class="tag">Interview Program</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Interview Program: Day Three</p>
+        <p class="card-sub">Negotiation, follow-up strategy, and converting interviews into offers.</p>
+      </div>
+    </div>
+
+
+    <!-- ══════════════ NEWSLETTERS ══════════════ -->
+    <div class="category-break">
+      <span class="category-name">Newsletters</span>
+      <span class="category-count">03</span>
+    </div>
+
+    <!-- NEWSLETTER 1 -->
+    <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=8015b190-29ee-11f0-8449-f5c623a97377&pt=campaign&t=1746485666&s=b90299e014521ed6ace4fecc6e3682e4e0922bcffce8f35af4630f79c4cbb72b','_blank')" role="button" tabindex="0" aria-label="View newsletter: Warming: Sweet Climate Week Pics Included!">
+      <div class="card-visual">
+        <div class="newsletter-scene">
+          <div class="newsletter-top-bar"></div>
+          <div class="newsletter-from">
+            <div class="newsletter-avatar">
+              <svg width="12" height="10" viewBox="0 0 12 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h12v10H0z" fill="none"/><path d="M0 0l6 5 6-5" stroke="#E8D84B" stroke-width="1.5" fill="none"/><rect x="0" y="0" width="12" height="10" rx="1" stroke="#E8D84B" stroke-width="1" fill="none"/></svg>
             </div>
-            <div class="web-body">
-              <div class="web-hero-img"></div>
-              <div class="web-line"></div>
-              <div class="web-line short"></div>
-              <div class="web-line shorter"></div>
-              <div style="height:20px;background:#1A1814;border-radius:10px;width:80px;margin-top:10px;"></div>
-            </div>
+            Sustainability Creatives
+          </div>
+          <p class="newsletter-subject">Warming: Sweet Climate Week Pics Included!</p>
+          <div class="newsletter-lines">
+            <div class="nl-line" style="width:95%"></div>
+            <div class="nl-line" style="width:82%"></div>
+            <div class="nl-line" style="width:68%"></div>
           </div>
         </div>
       </div>
       <div class="card-meta">
-        <div class="card-tags"><span class="tag">Web Design</span><span class="tag">UI/UX</span></div>
-        <p class="card-name">Harvest Co. Website</p>
-        <p class="card-sub">E-commerce redesign for an organic food marketplace</p>
+        <div class="card-tags">
+          <span class="tag" style="background:#FDF3DC;color:#8A6800">Newsletter</span>
+          <span class="tag">Community</span>
+        </div>
+        <p class="card-name">Warming: Sweet Climate Week Pics Included!</p>
+        <p class="card-sub">Community recap of Climate Week with highlights, photos, and event moments from across the network.</p>
+        <p class="card-metrics">998 Sent &nbsp;·&nbsp; 65.13% Opened &nbsp;·&nbsp; 2.51% Clicked</p>
       </div>
     </div>
 
-    <!-- CARD 4: Motion (wide) -->
-    <div class="project-card card-motion">
+    <!-- NEWSLETTER 2 -->
+    <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=7e2423ba-8a9e-11f0-863a-71a7ef473c68&pt=campaign&t=1757117901&s=20a09dbd515fa8695192755865ccf4212bbb8c5b489610ddd3ac40b5e5301d44','_blank')" role="button" tabindex="0" aria-label="View newsletter: Why Hiring Managers Skip Your Portfolio">
       <div class="card-visual">
-        <div class="motion-scene">
-          <div class="motion-ring" style="width:80px;height:80px;animation-delay:0s"></div>
-          <div class="motion-ring" style="width:80px;height:80px;animation-delay:1s"></div>
-          <div class="motion-ring" style="width:80px;height:80px;animation-delay:2s"></div>
-          <div class="motion-text">Motion <span class="motion-accent">in</span> design</div>
+        <div class="newsletter-scene">
+          <div class="newsletter-top-bar"></div>
+          <div class="newsletter-from">
+            <div class="newsletter-avatar">
+              <svg width="12" height="10" viewBox="0 0 12 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h12v10H0z" fill="none"/><path d="M0 0l6 5 6-5" stroke="#E8D84B" stroke-width="1.5" fill="none"/><rect x="0" y="0" width="12" height="10" rx="1" stroke="#E8D84B" stroke-width="1" fill="none"/></svg>
+            </div>
+            Sustainability Creatives
+          </div>
+          <p class="newsletter-subject">Why Hiring Managers Skip Your Portfolio: 2 Common Mistakes</p>
+          <div class="newsletter-lines">
+            <div class="nl-line" style="width:95%"></div>
+            <div class="nl-line" style="width:78%"></div>
+          </div>
         </div>
       </div>
       <div class="card-meta">
-        <div class="card-tags"><span class="tag">Motion</span><span class="tag">Animation</span><span class="tag">Video</span></div>
-        <p class="card-name">Kinetic Brand Films</p>
-        <p class="card-sub">Animated brand stories and motion graphics for digital campaigns</p>
+        <div class="card-tags">
+          <span class="tag" style="background:#FDF3DC;color:#8A6800">Newsletter</span>
+          <span class="tag">Career</span>
+        </div>
+        <p class="card-name">Why Hiring Managers Skip Your Portfolio</p>
+        <p class="card-sub">A deep dive into two common portfolio mistakes that cause hiring managers to move on — and how to fix them fast.</p>
+        <p class="card-metrics">1,165 Sent &nbsp;·&nbsp; 49.7% Opened &nbsp;·&nbsp; 1.37% Clicked</p>
       </div>
     </div>
 
-    <!-- CARD 5: Photography / Editorial -->
-    <div class="project-card card-photo">
+    <!-- NEWSLETTER 3 -->
+    <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=40620446-fa36-11ef-81d2-fb9a6fac7f9d&pt=campaign&t=1741387515&s=4ee06cd5db2a78f4935fe16cd6a64297e9323a842d88ef7a36646e9973a75512','_blank')" role="button" tabindex="0" aria-label="View newsletter: Free Leadership Training">
       <div class="card-visual">
-        <div class="photo-scene">
-          <div class="photo-swatch" style="background:#C9A87C;grid-row:span 2;"></div>
-          <div class="photo-swatch" style="background:#8B7355;"></div>
-          <div class="photo-swatch" style="background:#4A3728;"></div>
+        <div class="newsletter-scene">
+          <div class="newsletter-top-bar"></div>
+          <div class="newsletter-from">
+            <div class="newsletter-avatar">
+              <svg width="12" height="10" viewBox="0 0 12 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h12v10H0z" fill="none"/><path d="M0 0l6 5 6-5" stroke="#E8D84B" stroke-width="1.5" fill="none"/><rect x="0" y="0" width="12" height="10" rx="1" stroke="#E8D84B" stroke-width="1" fill="none"/></svg>
+            </div>
+            Sustainability Creatives
+          </div>
+          <p class="newsletter-subject">FREE LEADERSHIP TRAINING</p>
+          <div class="newsletter-lines">
+            <div class="nl-line" style="width:95%"></div>
+            <div class="nl-line" style="width:85%"></div>
+            <div class="nl-line" style="width:60%"></div>
+          </div>
         </div>
       </div>
       <div class="card-meta">
-        <div class="card-tags"><span class="tag">Editorial</span><span class="tag">Print</span></div>
-        <p class="card-name">Terrain Magazine</p>
-        <p class="card-sub">Editorial art direction and layout for a quarterly print publication</p>
+        <div class="card-tags">
+          <span class="tag" style="background:#FDF3DC;color:#8A6800">Newsletter</span>
+          <span class="tag">Leadership</span>
+        </div>
+        <p class="card-name">FREE LEADERSHIP TRAINING</p>
+        <p class="card-sub">Announcing a free leadership training opportunity for sustainability professionals ready to level up their careers.</p>
+        <p class="card-metrics">674 Sent &nbsp;·&nbsp; 64.09% Opened &nbsp;·&nbsp; 5.93% Clicked</p>
+      </div>
+    </div>
+
+
+    <!-- ══════════════ LINKEDIN POSTS ══════════════ -->
+    <div class="category-break">
+      <span class="category-name">LinkedIn Posts</span>
+      <span class="category-count">04</span>
+    </div>
+
+    <!-- LINKEDIN 1: Blog-style (wide) -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-linkedin card-wide" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7307836031729311745/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn post: blog-style">
+      <div class="card-visual">
+        <div class="linkedin-scene">
+          <div class="linkedin-watermark">in</div>
+          <div class="linkedin-profile">
+            <div class="linkedin-avatar"></div>
+            <div>
+              <div class="linkedin-name-line"></div>
+              <div class="linkedin-role-line"></div>
+            </div>
+          </div>
+          <div class="linkedin-text-lines">
+            <div class="li-line" style="width:100%"></div>
+            <div class="li-line" style="width:96%"></div>
+            <div class="li-line" style="width:88%"></div>
+            <div class="li-line" style="width:92%"></div>
+            <div class="li-line" style="width:75%"></div>
+            <div class="li-line" style="width:50%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#E8F0FB;color:#0A66C2">LinkedIn</span>
+          <span class="tag">Blog Post</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Long-Form: Career & Sustainability</p>
+        <p class="card-sub">A long-form reflection on career growth, sustainability, and what it really takes to build something meaningful from scratch.</p>
+        <p class="card-metrics">135 Reactions &nbsp;·&nbsp; 30 Comments</p>
+      </div>
+    </div>
+
+    <!-- LINKEDIN 2: Partnered event -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_the-sustainability-creatives-are-excited-activity-7348002884866756608-BbNs','_blank')" role="button" tabindex="0" aria-label="View LinkedIn post: partnered event promotion">
+      <div class="card-visual">
+        <div class="linkedin-scene">
+          <div class="linkedin-watermark">in</div>
+          <div class="linkedin-profile">
+            <div class="linkedin-avatar"></div>
+            <div>
+              <div class="linkedin-name-line"></div>
+              <div class="linkedin-role-line"></div>
+            </div>
+          </div>
+          <div class="linkedin-text-lines">
+            <div class="li-line" style="width:100%"></div>
+            <div class="li-line" style="width:90%"></div>
+            <div class="li-line" style="width:80%"></div>
+            <div class="li-line" style="width:60%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#E8F0FB;color:#0A66C2">LinkedIn</span>
+          <span class="tag">Event Promo</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Partnered Event Announcement</p>
+        <p class="card-sub">Promoting an upcoming collaborative event bringing the sustainability community together with a partner organization.</p>
+        <p class="card-metrics">23 Reactions &nbsp;·&nbsp; 1,097 Impressions &nbsp;·&nbsp; 1 Comment</p>
+      </div>
+    </div>
+
+    <!-- LINKEDIN 3: SF/LA Climate Week (wide) -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-linkedin card-wide" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_laclimateweek-sfclimateweek-activity-7319152269101318144-MatF/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn post: SF/LA Climate Week">
+      <div class="card-visual">
+        <div class="linkedin-scene">
+          <div class="linkedin-watermark">in</div>
+          <div class="linkedin-profile">
+            <div class="linkedin-avatar"></div>
+            <div>
+              <div class="linkedin-name-line"></div>
+              <div class="linkedin-role-line"></div>
+            </div>
+          </div>
+          <div class="linkedin-text-lines">
+            <div class="li-line" style="width:100%"></div>
+            <div class="li-line" style="width:93%"></div>
+            <div class="li-line" style="width:85%"></div>
+            <div class="li-line" style="width:90%"></div>
+            <div class="li-line" style="width:65%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#E8F0FB;color:#0A66C2">LinkedIn</span>
+          <span class="tag">Climate Week</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">LA &amp; SF Climate Week 2025</p>
+        <p class="card-sub">Rounding up the best moments from LA and SF Climate Week — featuring our community's events, highlights, and key takeaways.</p>
+        <p class="card-metrics">23 Reactions &nbsp;·&nbsp; 881 Impressions &nbsp;·&nbsp; 4 Comments</p>
+      </div>
+    </div>
+
+    <!-- LINKEDIN 4: Thought piece / Welcome to Hub -->
+    <!-- PLACEHOLDER: review this — update title and description -->
+    <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_welcome-to-the-hub-activity-7313991250997563392-kFnb/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn post: Welcome to the Hub thought piece">
+      <div class="card-visual">
+        <div class="linkedin-scene">
+          <div class="linkedin-watermark">in</div>
+          <div class="linkedin-profile">
+            <div class="linkedin-avatar"></div>
+            <div>
+              <div class="linkedin-name-line"></div>
+              <div class="linkedin-role-line"></div>
+            </div>
+          </div>
+          <div class="linkedin-text-lines">
+            <div class="li-line" style="width:100%"></div>
+            <div class="li-line" style="width:88%"></div>
+            <div class="li-line" style="width:72%"></div>
+            <div class="li-line" style="width:55%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#E8F0FB;color:#0A66C2">LinkedIn</span>
+          <span class="tag">Thought Piece</span>
+        </div>
+        <!-- PLACEHOLDER: review this -->
+        <p class="card-name">Welcome to The Hub</p>
+        <p class="card-sub">Introducing The Hub — a new home for sustainability professionals to connect, collaborate, and grow together.</p>
+        <p class="card-metrics">28 Reactions &nbsp;·&nbsp; 1,086 Impressions &nbsp;·&nbsp; 6 Comments</p>
+      </div>
+    </div>
+
+
+    <!-- ══════════════ LUMA EVENTS ══════════════ -->
+    <div class="category-break">
+      <span class="category-name">Luma Events</span>
+      <span class="category-count">04</span>
+    </div>
+
+    <!-- LUMA 1: Main Calendar (wide) -->
+    <div class="project-card card-luma card-wide" onclick="window.open('https://luma.com/sustainabilitycreatives?k=c','_blank')" role="button" tabindex="0" aria-label="View Sustainability Creatives Luma Calendar">
+      <div class="card-visual">
+        <div class="luma-scene">
+          <div class="luma-glow luma-glow-purple"></div>
+          <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+            <rect x="8" y="18" width="74" height="64" rx="9" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <rect x="8" y="18" width="74" height="23" rx="9" fill="rgba(160,120,255,0.35)"/>
+            <rect x="8" y="33" width="74" height="8" fill="rgba(160,120,255,0.35)"/>
+            <line x1="8" y1="50" x2="82" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <circle cx="27" cy="12" r="5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <circle cx="63" cy="12" r="5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <circle cx="27" cy="62" r="4" fill="rgba(255,255,255,0.45)"/>
+            <circle cx="45" cy="62" r="4" fill="#E8D84B"/>
+            <circle cx="63" cy="62" r="4" fill="rgba(255,255,255,0.45)"/>
+            <circle cx="27" cy="76" r="4" fill="rgba(255,255,255,0.45)"/>
+            <circle cx="45" cy="76" r="4" fill="rgba(255,255,255,0.45)"/>
+            <circle cx="63" cy="76" r="4" fill="rgba(255,255,255,0.25)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#EDE7FF;color:#5B21B6">Luma</span>
+          <span class="tag">Calendar</span>
+        </div>
+        <p class="card-name">Sustainability Creatives Calendar</p>
+        <p class="card-sub">Our full community event calendar — home to sustainability-focused events, webinars, and workshops for creative professionals.</p>
+        <p class="card-metrics">1,433 Subscribers &nbsp;·&nbsp; 183 Events &nbsp;·&nbsp; 22 ★ Reviews</p>
+      </div>
+    </div>
+
+    <!-- LUMA 2: Charlie Sellars -->
+    <div class="project-card card-luma" onclick="window.open('https://luma.com/5b2mf1oe','_blank')" role="button" tabindex="0" aria-label="View Climate Confessional: Charlie Sellars event">
+      <div class="card-visual">
+        <div class="luma-scene">
+          <div class="luma-glow luma-glow-purple"></div>
+          <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+            <circle cx="35" cy="26" r="16" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <circle cx="35" cy="22" r="9" fill="rgba(255,255,255,0.2)"/>
+            <path d="M14 58 Q14 44 35 44 Q56 44 56 58" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <circle cx="55" cy="15" r="6" fill="#E8D84B" opacity="0.9"/>
+            <line x1="55" y1="6" x2="55" y2="10" stroke="#E8D84B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <line x1="64" y1="15" x2="60" y2="15" stroke="#E8D84B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <line x1="61" y1="9" x2="58" y2="12" stroke="#E8D84B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#EDE7FF;color:#5B21B6">Luma</span>
+          <span class="tag">Speaker Event</span>
+        </div>
+        <p class="card-name">Climate Confessional: Charlie Sellars</p>
+        <p class="card-sub">A candid conversation with Charlie Sellars on sustainability careers, climate confessions, and what the industry gets wrong.</p>
+        <p class="card-metrics">126 Guests</p>
+      </div>
+    </div>
+
+    <!-- LUMA 3: Portfolio Tips -->
+    <div class="project-card card-luma-green card-luma" onclick="window.open('https://luma.com/qwzglyde','_blank')" role="button" tabindex="0" aria-label="View Portfolio Tips and Tricks event">
+      <div class="card-visual" style="background:#1A3D2B;">
+        <div class="luma-scene">
+          <div class="luma-glow luma-glow-green"></div>
+          <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+            <rect x="12" y="10" width="46" height="56" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+            <rect x="20" y="20" width="30" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+            <rect x="20" y="28" width="24" height="3" rx="1.5" fill="rgba(255,255,255,0.2)"/>
+            <rect x="20" y="34" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.2)"/>
+            <rect x="20" y="40" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.2)"/>
+            <rect x="20" y="50" width="30" height="8" rx="4" fill="#E8D84B" opacity="0.9"/>
+            <text x="35" y="56.5" text-anchor="middle" font-family="'Syne',sans-serif" font-size="5" font-weight="700" fill="#1A1814">VIEW TIPS</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#DCFCE7;color:#166534">Luma</span>
+          <span class="tag">Workshop</span>
+        </div>
+        <p class="card-name">Portfolio Tips: Job Switcher Edition</p>
+        <p class="card-sub">Practical portfolio advice for career changers, with real examples and actionable tips from sustainability hiring managers.</p>
+        <p class="card-metrics">62 Guests</p>
+      </div>
+    </div>
+
+    <!-- LUMA 4: Redesign Jam (wide) -->
+    <div class="project-card card-luma-green card-luma card-wide" onclick="window.open('https://luma.com/466bqkng','_blank')" role="button" tabindex="0" aria-label="View Redesign Jam event">
+      <div class="card-visual" style="background:#1A3D2B;">
+        <div class="luma-scene">
+          <div class="luma-glow luma-glow-green"></div>
+          <svg width="90" height="70" viewBox="0 0 90 70" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+            <!-- Light bulb -->
+            <circle cx="45" cy="28" r="18" fill="rgba(232,216,75,0.12)" stroke="rgba(232,216,75,0.4)" stroke-width="1.5"/>
+            <circle cx="45" cy="26" r="10" fill="rgba(232,216,75,0.25)"/>
+            <line x1="40" y1="46" x2="40" y2="52" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="50" y1="46" x2="50" y2="52" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="38" y1="52" x2="52" y2="52" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Sparks -->
+            <circle cx="22" cy="15" r="3" fill="#E8D84B" opacity="0.7"/>
+            <circle cx="68" cy="12" r="2" fill="#E8D84B" opacity="0.5"/>
+            <circle cx="16" cy="36" r="2" fill="rgba(80,200,120,0.6)"/>
+            <circle cx="74" cy="40" r="3" fill="rgba(80,200,120,0.6)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#DCFCE7;color:#166534">Luma</span>
+          <span class="tag">Design Event</span>
+        </div>
+        <p class="card-name">Re-design Jam: Bright Ideas for a Sustainable Future</p>
+        <p class="card-sub">A collaborative design session where participants reimagine real-world products through a sustainability lens.</p>
+        <p class="card-metrics">67 Guests</p>
       </div>
     </div>
 
@@ -752,241 +1042,120 @@
 <section class="about" id="about">
   <div>
     <p class="about-label">About me</p>
-    <h2 class="about-title">Design that <em>feels</em> as good as it looks</h2>
+    <!-- PLACEHOLDER: review this — update about headline -->
+    <h2 class="about-title">Content that <em>builds</em> communities,<br>not just audiences</h2>
+    <!-- PLACEHOLDER: review this — update bio -->
     <p class="about-body">
-      I believe great design lives at the intersection of strategy and craft. I partner with brands to create visual systems that aren't just beautiful — they're built to move people. Whether it's a social campaign, a brand refresh, or a product launch, I bring curiosity and precision to every pixel.
+      I'm Lila Roginski — a business development manager and content creator focused on the sustainability space. Over 18 months at Sustainability Creatives, I've grown newsletter audiences, LinkedIn followings, and a thriving event calendar from the ground up. I believe the best content doesn't just inform — it connects people to something worth caring about.
     </p>
     <div class="about-stats">
       <div>
-        <div class="stat-num">8+</div>
-        <div class="stat-label">Years experience</div>
+        <div class="stat-num">~1,300</div>
+        <div class="stat-label">Newsletter subscribers</div>
       </div>
       <div>
-        <div class="stat-num">60+</div>
-        <div class="stat-label">Projects delivered</div>
+        <div class="stat-num">65+</div>
+        <div class="stat-label">Newsletters sent</div>
       </div>
       <div>
-        <div class="stat-num">24</div>
-        <div class="stat-label">Brand clients</div>
+        <div class="stat-num">1,500</div>
+        <div class="stat-label">Luma calendar subs</div>
       </div>
     </div>
   </div>
   <div class="skills-list">
     <div class="skill-item">
-      <div class="skill-icon">✦</div>
+      <div class="skill-icon">✉</div>
       <div>
-        <div class="skill-name">Brand Identity</div>
-        <div class="skill-desc">Logo systems, visual language, guidelines</div>
+        <div class="skill-name">Newsletter Strategy</div>
+        <div class="skill-desc">Email design, audience growth, campaign analytics</div>
       </div>
       <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div>
     </div>
     <div class="skill-item">
       <div class="skill-icon">◈</div>
       <div>
-        <div class="skill-name">Campaign Design</div>
-        <div class="skill-desc">Social, OOH, digital advertising</div>
+        <div class="skill-name">LinkedIn Growth</div>
+        <div class="skill-desc">Content strategy, account management, community</div>
       </div>
-      <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-icon">⬡</div>
-      <div>
-        <div class="skill-name">Illustration</div>
-        <div class="skill-desc">Flat, editorial & character design</div>
-      </div>
-      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
     </div>
     <div class="skill-item">
       <div class="skill-icon">▶</div>
       <div>
-        <div class="skill-name">Motion Design</div>
-        <div class="skill-desc">After Effects, Rive, CSS animation</div>
+        <div class="skill-name">Video Production</div>
+        <div class="skill-desc">Production coordination, storytelling, editing</div>
       </div>
-      <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">⬡</div>
+      <div>
+        <div class="skill-name">Event Management</div>
+        <div class="skill-desc">Calendar curation, speaker coordination, Luma</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-name">your name.</span>
+  <span class="footer-name">Lila Roginski.</span>
   <span class="footer-copy">© 2026 — All rights reserved</span>
   <div class="footer-links">
-    <a href="#">LinkedIn</a>
-    <a href="#">Dribbble</a>
-    <a href="#">Instagram</a>
+    <a href="https://www.linkedin.com/in/lila-roginski/" target="_blank">LinkedIn</a>
+    <a href="https://luma.com/sustainabilitycreatives?k=c" target="_blank">Luma</a>
+    <!-- PLACEHOLDER: review this — update with Lila's real email -->
+    <a href="mailto:lila@example.com">Email</a>
   </div>
 </footer>
 
-<!-- CHEWY MODAL -->
-<div class="modal-overlay" id="chewy-modal" onclick="handleOverlayClick(event)" role="dialog" aria-modal="true" aria-label="Chewy Campaign Details">
-  <div class="modal" style="max-width:960px">
+<!-- VIDEO MODAL -->
+<div class="modal-overlay" id="video-modal" onclick="handleOverlayClick(event)" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
-
-    <div class="modal-hero">
-      <svg width="100%" height="100%" viewBox="0 0 920 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
-        <rect width="920" height="300" fill="#1C49C2"/>
-        <circle cx="820" cy="30" r="180" fill="rgba(255,255,255,0.05)"/>
-        <circle cx="80" cy="280" r="160" fill="rgba(74,140,63,0.12)"/>
-        <ellipse cx="460" cy="320" rx="300" ry="100" fill="rgba(74,140,63,0.1)"/>
-      </svg>
-      <div style="position:relative;z-index:2;text-align:center;padding:0 2rem">
-        <p style="font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:0.6rem">Chewy · Social Media Campaign · 2025</p>
-        <h2 style="font-family:'DM Serif Display',serif;font-size:2.6rem;color:white;letter-spacing:-0.02em;margin-bottom:0.4rem">Organic Food Subscription Box</h2>
-        <p style="font-family:'DM Sans',sans-serif;font-size:1rem;color:rgba(255,255,255,0.65);max-width:540px;margin:0 auto 1.25rem">A social media ad campaign introducing Chewy's new organic food subscription — crafted for health-conscious pet lovers everywhere.</p>
-        <a href="https://thriving-panda-651cae.netlify.app/" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:0.5rem 1.25rem;border-radius:30px;font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-decoration:none;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">View Live Campaign ↗</a>
-      </div>
+    <div class="modal-video-wrap">
+      <video id="modal-video" controls playsinline></video>
     </div>
-
-    <!-- Campaign overview strips -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid rgba(26,24,20,0.1)">
-      <div style="padding:1.25rem 1.5rem;border-right:1px solid rgba(26,24,20,0.08)">
-        <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin-bottom:0.35rem">Campaign Goal</p>
-        <p style="font-size:0.88rem;line-height:1.5;color:#3A3630">Launch the Organic Subscription Box and drive first-time subscribers with a 20% introductory offer.</p>
-      </div>
-      <div style="padding:1.25rem 1.5rem;border-right:1px solid rgba(26,24,20,0.08)">
-        <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin-bottom:0.35rem">Audience</p>
-        <p style="font-size:0.88rem;line-height:1.5;color:#3A3630">Health-conscious pet owners who prioritise organic, clean-ingredient food for dogs, cats & small animals.</p>
-      </div>
-      <div style="padding:1.25rem 1.5rem">
-        <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin-bottom:0.35rem">Creative Direction</p>
-        <p style="font-size:0.88rem;line-height:1.5;color:#3A3630">Bold flat illustration, Chewy Blue as hero color, warm organic greens, and playful expressive animals.</p>
-      </div>
+    <div class="modal-video-info">
+      <p class="modal-video-label">Video</p>
+      <h2 class="modal-video-title" id="modal-video-title"></h2>
+      <p class="modal-video-desc" id="modal-video-desc"></p>
     </div>
-
-    <!-- Ad variants header -->
-    <div style="padding:2rem 2rem 1rem">
-      <p style="font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888;margin-bottom:0.25rem">Three variants. One campaign.</p>
-      <h3 style="font-family:'DM Serif Display',serif;font-size:1.5rem;letter-spacing:-0.01em">The Ads</h3>
-    </div>
-
-    <!-- Three ad variant cards -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;padding:0 2rem 2.5rem">
-
-      <!-- Dog Ad -->
-      <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,24,20,0.08)">
-        <div style="background:#1C49C2;padding:1.5rem 1rem 1rem;text-align:center;position:relative;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 10px;font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:white;letter-spacing:0.05em">20% OFF</div>
-          <!-- Dog illustration -->
-          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px">
-            <circle cx="40" cy="32" r="22" fill="#F5C57A"/>
-            <ellipse cx="24" cy="22" rx="10" ry="16" fill="#E8A850" transform="rotate(-18,24,22)"/>
-            <ellipse cx="56" cy="22" rx="10" ry="16" fill="#E8A850" transform="rotate(18,56,22)"/>
-            <circle cx="33" cy="30" r="5.5" fill="white"/><circle cx="47" cy="30" r="5.5" fill="white"/>
-            <circle cx="34" cy="30" r="2.8" fill="#1A1814"/><circle cx="48" cy="30" r="2.8" fill="#1A1814"/>
-            <ellipse cx="40" cy="37" rx="6" ry="4" fill="#E8936A"/>
-            <path d="M35 41 Q40 46 45 41" stroke="#1A1814" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <rect x="22" y="52" width="36" height="26" rx="12" fill="#F5C57A"/>
-            <line x1="32" y1="52" x2="28" y2="78" stroke="#E8A850" stroke-width="7" stroke-linecap="round"/>
-            <line x1="48" y1="52" x2="52" y2="78" stroke="#E8A850" stroke-width="7" stroke-linecap="round"/>
-          </svg>
-          <p style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:white;font-style:italic;line-height:1.2;margin-bottom:4px">Real Food.<br>Real Happy.</p>
-          <p style="font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase">Dogs</p>
-        </div>
-        <div style="padding:1rem 1.1rem;background:white">
-          <p style="font-family:'Syne',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1C49C2;margin-bottom:0.35rem">Ad 01 / 03 — The Dog Ad</p>
-          <p style="font-size:0.82rem;line-height:1.55;color:#5A574F">Warm, joyful energy targeting dog owners. The golden retriever's enthusiasm mirrors how dogs feel about mealtime — pure happiness.</p>
-          <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#1A1814;margin-top:0.75rem">CTA: Try Your First Box Free</p>
-        </div>
-      </div>
-
-      <!-- Cat Ad -->
-      <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,24,20,0.08)">
-        <div style="background:#1C49C2;padding:1.5rem 1rem 1rem;text-align:center;position:relative;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 10px;font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:white;letter-spacing:0.05em">20% OFF</div>
-          <!-- Cat illustration -->
-          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px">
-            <circle cx="40" cy="32" r="20" fill="#E8D5B0"/>
-            <path d="M24 20 L19 6 L32 18Z" fill="#D4C09A"/>
-            <path d="M56 20 L61 6 L48 18Z" fill="#D4C09A"/>
-            <circle cx="33" cy="30" r="5" fill="white"/><circle cx="47" cy="30" r="5" fill="white"/>
-            <circle cx="34" cy="30" r="2.5" fill="#2A1F4A"/><circle cx="48" cy="30" r="2.5" fill="#2A1F4A"/>
-            <circle cx="40" cy="35" r="3" fill="#E8936A"/>
-            <path d="M35 39 Q40 43 45 39" stroke="#1A1814" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <line x1="18" y1="32" x2="30" y2="33" stroke="#bbb" stroke-width="1"/><line x1="50" y1="33" x2="62" y2="32" stroke="#bbb" stroke-width="1"/>
-            <rect x="24" y="50" width="32" height="26" rx="12" fill="#E8D5B0"/>
-            <path d="M52 55 Q66 50 65 72 Q57 68 52 55Z" fill="#D4C09A"/>
-            <line x1="33" y1="50" x2="30" y2="76" stroke="#D4C09A" stroke-width="6" stroke-linecap="round"/>
-            <line x1="47" y1="50" x2="50" y2="76" stroke="#D4C09A" stroke-width="6" stroke-linecap="round"/>
-          </svg>
-          <p style="font-family:'DM Serif Display',serif;font-size:1.05rem;color:white;font-style:italic;line-height:1.2;margin-bottom:4px">Picky Eater?<br>Finally Approved.</p>
-          <p style="font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase">Cats</p>
-        </div>
-        <div style="padding:1rem 1.1rem;background:white">
-          <p style="font-family:'Syne',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1C49C2;margin-bottom:0.35rem">Ad 02 / 03 — The Cat Ad</p>
-          <p style="font-size:0.82rem;line-height:1.55;color:#5A574F">Dry wit for cat owners. The slightly smug tabby taps into the universal truth that cats are notoriously hard to please — until now.</p>
-          <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#1A1814;margin-top:0.75rem">CTA: Try Your First Box Free</p>
-        </div>
-      </div>
-
-      <!-- Small Animals Ad -->
-      <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,24,20,0.08)">
-        <div style="background:#1C49C2;padding:1.5rem 1rem 1rem;text-align:center;position:relative;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 10px;font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:white;letter-spacing:0.05em">20% OFF</div>
-          <!-- Small animals: hamster + guinea pig -->
-          <svg width="80" height="70" viewBox="0 0 80 70" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px">
-            <!-- Hamster left -->
-            <circle cx="22" cy="38" r="14" fill="#F5C57A"/>
-            <ellipse cx="14" cy="28" rx="6" ry="9" fill="#E8A850" transform="rotate(-20,14,28)"/>
-            <ellipse cx="30" cy="28" rx="6" ry="9" fill="#E8A850" transform="rotate(20,30,28)"/>
-            <circle cx="18" cy="36" r="3" fill="white"/><circle cx="26" cy="36" r="3" fill="white"/>
-            <circle cx="19" cy="36" r="1.5" fill="#1A1814"/><circle cx="27" cy="36" r="1.5" fill="#1A1814"/>
-            <ellipse cx="22" cy="40" rx="3.5" ry="2" fill="#F5A07A"/>
-            <path d="M19 43 Q22 46 25 43" stroke="#1A1814" stroke-width="1.2" fill="none"/>
-            <!-- Guinea pig right -->
-            <ellipse cx="58" cy="42" rx="16" ry="12" fill="#C8A870"/>
-            <circle cx="58" cy="32" r="10" fill="#D4B880"/>
-            <ellipse cx="50" cy="26" rx="5" ry="7" fill="#C4A860" transform="rotate(-10,50,26)"/>
-            <ellipse cx="66" cy="26" rx="5" ry="7" fill="#C4A860" transform="rotate(10,66,26)"/>
-            <circle cx="55" cy="31" r="2.5" fill="white"/><circle cx="61" cy="31" r="2.5" fill="white"/>
-            <circle cx="55.5" cy="31" r="1.2" fill="#1A1814"/><circle cx="61.5" cy="31" r="1.2" fill="#1A1814"/>
-            <ellipse cx="58" cy="34" rx="2.5" ry="1.5" fill="#E8936A"/>
-          </svg>
-          <p style="font-family:'DM Serif Display',serif;font-size:1.05rem;color:white;font-style:italic;line-height:1.2;margin-bottom:4px">Big Love for<br>Little Ones.</p>
-          <p style="font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase">Small Animals</p>
-        </div>
-        <div style="padding:1rem 1.1rem;background:white">
-          <p style="font-family:'Syne',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1C49C2;margin-bottom:0.35rem">Ad 03 / 03 — The Small Animals Ad</p>
-          <p style="font-size:0.82rem;line-height:1.55;color:#5A574F">Celebrating the often-overlooked small pet community. A hamster and guinea pig remind owners that little companions deserve the best too.</p>
-          <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#1A1814;margin-top:0.75rem">CTA: Try Your First Box Free</p>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Footer row -->
-    <div style="padding:1.25rem 2rem;border-top:1px solid rgba(26,24,20,0.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-        <span class="pill">Social Ads</span>
-        <span class="pill">1080×1080</span>
-        <span class="pill">Flat Illustration</span>
-        <span class="pill">Art Direction</span>
-        <span class="pill">3 Variants</span>
-      </div>
-      <a href="https://thriving-panda-651cae.netlify.app/" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:#1C49C2;color:white;padding:0.6rem 1.4rem;border-radius:30px;font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.03em;text-decoration:none">View Full Campaign ↗</a>
-    </div>
-
   </div>
 </div>
 
 <script>
-  function openModal(id) {
-    const modal = document.getElementById(id + '-modal');
-    if (modal) {
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+  function openVideo(filename, title, desc) {
+    const modal = document.getElementById('video-modal');
+    const video = document.getElementById('modal-video');
+    const titleEl = document.getElementById('modal-video-title');
+    const descEl = document.getElementById('modal-video-desc');
+    video.src = './videos/' + filename;
+    titleEl.textContent = title;
+    descEl.textContent = desc || '';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    video.play().catch(() => {});
   }
+
   function closeModal() {
+    const video = document.getElementById('modal-video');
+    if (video) {
+      video.pause();
+      video.src = '';
+    }
     document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
     document.body.style.overflow = '';
   }
+
   function handleOverlayClick(e) {
     if (e.target === e.currentTarget) closeModal();
   }
+
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // Keyboard accessibility for project cards
   document.querySelectorAll('.project-card[tabindex]').forEach(card => {
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
