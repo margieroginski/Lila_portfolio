@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chewy Organic Subscription Box — Campaign Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --chewy-blue: #1C49C2;
+    --chewy-blue-dark: #0e2e82;
+    --chewy-blue-light: #3A6FE0;
+    --chewy-yellow: #F5C842;
+    --chewy-green: #5A9E2F;
+    --white: #ffffff;
+    --off-white: #f7f5f0;
+    --text-dark: #0d1f4e;
+    --text-mid: #3a4a72;
+    --text-light: #7a8ab2;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--chewy-blue);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 40px 100px;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 10% 20%, rgba(58,111,224,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 400px at 90% 80%, rgba(14,46,130,0.6) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--chewy-yellow);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .hero-logo {
+    font-family: 'Nunito', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -2px;
+    line-height: 1;
+    transform: rotate(-2deg) skewX(-3deg);
+    display: inline-block;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero-logo span { color: var(--chewy-yellow); }
+
+  .hero-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.35s;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.45s;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.55s;
+  }
+
+  .tag {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+  }
+
+  .tag.green { background: rgba(90,158,47,0.25); border-color: rgba(90,158,47,0.4); color: #a8e06a; }
+  .tag.yellow { background: rgba(245,200,66,0.2); border-color: rgba(245,200,66,0.35); color: var(--chewy-yellow); }
+
+  /* ── BRIEF ── */
+  .brief {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 40px 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  .brief-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 24px;
+    border: 1px solid rgba(28,73,194,0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .brief-card.visible { opacity: 1; transform: translateY(0); }
+
+  .brief-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--chewy-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .brief-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--chewy-blue);
+    margin-bottom: 8px;
+  }
+
+  .brief-card p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.65;
+  }
+
+  /* ── ADS SECTION ── */
+  .ads-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 40px 80px;
+  }
+
+  .section-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--chewy-blue);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text-dark);
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+
+  .ad-block {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .ad-block.visible { opacity: 1; transform: translateY(0); }
+
+  .ad-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ad-number {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .ad-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--text-dark);
+    margin-top: 4px;
+    letter-spacing: -0.3px;
+  }
+
+  .ad-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-top: 6px;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+
+  .ad-specs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .spec-pill {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.3px;
+  }
+
+  .spec-pill.blue { background: rgba(28,73,194,0.08); color: var(--chewy-blue); }
+  .spec-pill.green { background: rgba(90,158,47,0.1); color: #3a7a1a; }
+  .spec-pill.yellow { background: rgba(245,200,66,0.2); color: #8a6e00; }
+
+  .ad-canvas {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(28,73,194,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ad-canvas:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 60px rgba(28,73,194,0.18), 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .ad-canvas svg { display: block; width: 100%; }
+
+  .ad-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 0 4px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ad-cta-line {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .ad-cta-line strong {
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(28,73,194,0.15), transparent);
+    margin: 0 40px 60px;
+    max-width: 1020px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--chewy-blue-dark);
+    padding: 50px 40px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Nunito', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: white;
+    transform: rotate(-1deg) skewX(-2deg);
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo span { color: var(--chewy-yellow); }
+
+  .footer p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .brief { grid-template-columns: 1fr; padding: 40px 20px 30px; }
+    .hero { padding: 60px 24px 80px; }
+    .hero-logo { font-size: 44px; }
+    .ads-section { padding: 20px 20px 60px; }
+    .ad-meta { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Campaign Portfolio · 2025</p>
+  <div class="hero-logo">chewy<span>.</span></div>
+  <h1 class="hero-title">Organic Food Subscription Box</h1>
+  <p class="hero-sub">A social media ad campaign introducing Chewy's new organic food subscription — crafted for health-conscious pet lovers everywhere.</p>
+  <div class="hero-tags">
+    <span class="tag">Social Media Ads</span>
+    <span class="tag yellow">1080 × 1080px</span>
+    <span class="tag green">🌿 Organic Product Launch</span>
+    <span class="tag">3 Ad Variants</span>
+  </div>
+</header>
+
+<!-- BRIEF CARDS -->
+<section class="brief">
+  <div class="brief-card">
+    <div class="brief-card-icon">🎯</div>
+    <h3>Campaign Goal</h3>
+    <p>Launch the new Chewy Organic Food Subscription Box and drive first-time subscribers with a 20% introductory offer.</p>
+  </div>
+  <div class="brief-card" style="transition-delay:0.1s">
+    <div class="brief-card-icon">👥</div>
+    <h3>Audience</h3>
+    <p>Health-conscious pet owners who prioritise organic, clean-ingredient food for their dogs, cats, and small animals.</p>
+  </div>
+  <div class="brief-card" style="transition-delay:0.2s">
+    <div class="brief-card-icon">✏️</div>
+    <h3>Creative Direction</h3>
+    <p>Bold flat illustration style with Chewy Blue as the hero color, warm organic greens, and playful expressive animals.</p>
+  </div>
+</section>
+
+<!-- ADS -->
+<main class="ads-section">
+  <p class="section-label">The Ads</p>
+  <h2 class="section-title">Three variants. One campaign.</h2>
+
+  <!-- AD 1: DOG -->
+  <div class="ad-block">
+    <div class="ad-meta">
+      <div>
+        <p class="ad-number">Ad 01 / 03</p>
+        <h3 class="ad-title">The Dog Ad</h3>
+        <p class="ad-desc">Warm, joyful energy targeting dog owners. The golden retriever's enthusiasm mirrors how dogs feel about mealtime — pure happiness.</p>
+      </div>
+      <div class="ad-specs">
+        <span class="spec-pill blue">Feed Post</span>
+        <span class="spec-pill yellow">20% Off</span>
+        <span class="spec-pill green">Dogs</span>
+      </div>
+    </div>
+    <div class="ad-canvas">
+      <svg viewBox="0 0 680 700" xmlns="http://www.w3.org/2000/svg">
+        <rect width="680" height="700" fill="#1C49C2"/>
+        <ellipse cx="60" cy="80" rx="55" ry="55" fill="#2558D8" opacity="0.6"/>
+        <ellipse cx="620" cy="600" rx="70" ry="70" fill="#2558D8" opacity="0.6"/>
+        <ellipse cx="580" cy="90" rx="40" ry="40" fill="#3A6FE0" opacity="0.4"/>
+        <ellipse cx="100" cy="590" rx="50" ry="50" fill="#3A6FE0" opacity="0.4"/>
+        <ellipse cx="580" cy="55" rx="18" ry="8" fill="#5A9E2F" opacity="0.85" transform="rotate(-30 580 55)"/>
+        <ellipse cx="55" cy="160" rx="14" ry="6" fill="#7BBF44" opacity="0.85" transform="rotate(50 55 160)"/>
+        <ellipse cx="625" cy="200" rx="14" ry="6" fill="#5A9E2F" opacity="0.85" transform="rotate(-50 625 200)"/>
+        <ellipse cx="80" cy="480" rx="14" ry="6" fill="#7BBF44" opacity="0.85" transform="rotate(20 80 480)"/>
+        <rect x="60" y="360" width="200" height="190" rx="8" fill="#F5E6C0" stroke="#C9A84C" stroke-width="2"/>
+        <rect x="60" y="360" width="200" height="42" rx="8" fill="#C9A84C"/>
+        <rect x="60" y="390" width="200" height="12" fill="#C9A84C"/>
+        <text x="160" y="388" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">chewy</text>
+        <rect x="82" y="420" width="156" height="90" rx="6" fill="#FFFFFF" opacity="0.9"/>
+        <text x="160" y="448" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="16" font-weight="700" fill="#1C49C2">ORGANIC</text>
+        <line x1="90" y1="456" x2="230" y2="456" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+        <text x="160" y="474" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="11" fill="#3A7A1A">monthly delivery</text>
+        <text x="160" y="492" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="10" fill="#888860">dogs &amp; cats</text>
+        <line x1="160" y1="360" x2="160" y2="550" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+        <line x1="60" y1="402" x2="260" y2="402" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+        <ellipse cx="460" cy="575" rx="80" ry="16" fill="#0A2A80" opacity="0.2"/>
+        <path d="M520 440 Q580 390 565 330 Q552 295 530 308" fill="none" stroke="#E8A84C" stroke-width="18" stroke-linecap="round"/>
+        <ellipse cx="455" cy="470" rx="95" ry="80" fill="#E8A84C"/>
+        <ellipse cx="390" cy="510" rx="40" ry="35" fill="#D4903A"/>
+        <ellipse cx="515" cy="510" rx="38" ry="33" fill="#D4903A"/>
+        <ellipse cx="380" cy="555" rx="32" ry="18" fill="#C07830"/>
+        <ellipse cx="522" cy="553" rx="30" ry="17" fill="#C07830"/>
+        <ellipse cx="455" cy="490" rx="52" ry="55" fill="#F0C870" opacity="0.45"/>
+        <rect x="415" y="510" width="26" height="58" rx="13" fill="#D4903A"/>
+        <ellipse cx="428" cy="572" rx="18" ry="10" fill="#C07830"/>
+        <rect x="466" y="510" width="26" height="58" rx="13" fill="#D4903A"/>
+        <ellipse cx="479" cy="572" rx="18" ry="10" fill="#C07830"/>
+        <ellipse cx="430" cy="385" rx="44" ry="40" fill="#E8A84C"/>
+        <ellipse cx="408" cy="322" rx="68" ry="62" fill="#F0B858"/>
+        <ellipse cx="378" cy="348" rx="32" ry="22" fill="#E8A84C"/>
+        <ellipse cx="370" cy="340" rx="16" ry="10" fill="#3A2A1A"/>
+        <ellipse cx="367" cy="337" rx="5" ry="3" fill="#FFFFFF" opacity="0.3"/>
+        <circle cx="400" cy="308" r="14" fill="#3A2A1A"/>
+        <circle cx="396" cy="304" r="5" fill="#FFFFFF" opacity="0.6"/>
+        <circle cx="438" cy="305" r="4" fill="#3A2A1A"/>
+        <ellipse cx="402" cy="293" rx="6" ry="3" fill="#C07830"/>
+        <ellipse cx="348" cy="300" rx="30" ry="44" fill="#C07830" transform="rotate(-10 348 300)"/>
+        <ellipse cx="460" cy="292" rx="26" ry="40" fill="#C07830" transform="rotate(10 460 292)"/>
+        <ellipse cx="374" cy="366" rx="13" ry="15" fill="#E87070"/>
+        <line x1="374" y1="357" x2="374" y2="381" stroke="#C85050" stroke-width="1.5"/>
+        <rect x="383" y="365" width="82" height="13" rx="6.5" fill="#1C49C2"/>
+        <circle cx="424" cy="371" r="6" fill="#F5C842"/>
+        <text x="340" y="82" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="38" font-weight="900" fill="#FFFFFF">Real Food.</text>
+        <text x="340" y="126" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="38" font-weight="900" fill="#F5E060">Real Happy.</text>
+        <text x="340" y="168" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="15" fill="#C8DCFF">Organic food, delivered monthly — made for dogs.</text>
+        <ellipse cx="570" cy="340" rx="66" ry="66" fill="#F5C842"/>
+        <text x="570" y="323" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="15" font-weight="900" fill="#1C49C2">20% OFF</text>
+        <text x="570" y="343" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="12" fill="#1C49C2">your first</text>
+        <text x="570" y="360" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="12" fill="#1C49C2">order!</text>
+        <rect x="190" y="590" width="300" height="58" rx="29" fill="#F5C842"/>
+        <text x="340" y="626" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="20" font-weight="900" fill="#1C49C2">Try Your First Box Free</text>
+        <text x="340" y="668" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="13" fill="#FFFFFF" opacity="0.7">chewy.com  •  Where pet lovers shop</text>
+      </svg>
+    </div>
+    <div class="ad-footer">
+      <span class="ad-cta-line">Headline: <strong>"Real Food. Real Happy."</strong></span>
+      <span class="ad-cta-line">CTA: <strong>Try Your First Box Free</strong></span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- AD 2: CAT -->
+  <div class="ad-block" style="transition-delay:0.1s">
+    <div class="ad-meta">
+      <div>
+        <p class="ad-number">Ad 02 / 03</p>
+        <h3 class="ad-title">The Cat Ad</h3>
+        <p class="ad-desc">Dry wit for cat owners. The slightly smug tabby tapping into the universal truth that cats are notoriously hard to please — until now.</p>
+      </div>
+      <div class="ad-specs">
+        <span class="spec-pill blue">Feed Post</span>
+        <span class="spec-pill yellow">20% Off</span>
+        <span class="spec-pill green">Cats</span>
+      </div>
+    </div>
+    <div class="ad-canvas">
+      <svg viewBox="0 0 680 700" xmlns="http://www.w3.org/2000/svg">
+        <rect width="680" height="700" fill="#1C49C2"/>
+        <ellipse cx="80" cy="100" rx="65" ry="65" fill="#2558D8" opacity="0.5"/>
+        <ellipse cx="600" cy="580" rx="80" ry="80" fill="#2558D8" opacity="0.5"/>
+        <ellipse cx="620" cy="110" rx="42" ry="42" fill="#3A6FE0" opacity="0.35"/>
+        <ellipse cx="80" cy="570" rx="52" ry="52" fill="#3A6FE0" opacity="0.35"/>
+        <ellipse cx="90" cy="180" rx="16" ry="7" fill="#7BBF44" opacity="0.9" transform="rotate(40 90 180)"/>
+        <ellipse cx="590" cy="190" rx="15" ry="6" fill="#5A9E2F" opacity="0.9" transform="rotate(-40 590 190)"/>
+        <ellipse cx="595" cy="60" rx="18" ry="7" fill="#7BBF44" opacity="0.9" transform="rotate(-50 595 60)"/>
+        <ellipse cx="612" cy="45" rx="14" ry="6" fill="#5A9E2F" opacity="0.9" transform="rotate(-70 612 45)"/>
+        <rect x="60" y="355" width="200" height="200" rx="8" fill="#F5E6C0" stroke="#C9A84C" stroke-width="2"/>
+        <rect x="60" y="355" width="200" height="42" rx="8" fill="#C9A84C"/>
+        <rect x="60" y="385" width="200" height="12" fill="#C9A84C"/>
+        <text x="160" y="383" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">chewy</text>
+        <path d="M60 355 Q105 305 160 310 Q215 305 260 355" fill="#E8CA80" stroke="#C9A84C" stroke-width="2"/>
+        <rect x="82" y="415" width="156" height="90" rx="6" fill="#FFFFFF" opacity="0.9"/>
+        <text x="160" y="443" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="16" font-weight="700" fill="#1C49C2">ORGANIC</text>
+        <line x1="90" y1="451" x2="230" y2="451" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+        <text x="160" y="469" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="11" fill="#3A7A1A">monthly delivery</text>
+        <text x="160" y="487" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="10" fill="#888860">dogs &amp; cats</text>
+        <line x1="160" y1="397" x2="160" y2="555" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+        <line x1="60" y1="397" x2="260" y2="397" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+        <ellipse cx="460" cy="580" rx="75" ry="14" fill="#0A2A80" opacity="0.2"/>
+        <path d="M510 560 Q570 520 575 460 Q578 410 548 390 Q525 375 510 388" fill="none" stroke="#A0987A" stroke-width="14" stroke-linecap="round"/>
+        <ellipse cx="455" cy="478" rx="88" ry="95" fill="#C8BE90"/>
+        <ellipse cx="450" cy="500" rx="48" ry="62" fill="#EDE8C8"/>
+        <ellipse cx="385" cy="545" rx="35" ry="22" fill="#B0A878"/>
+        <ellipse cx="522" cy="543" rx="32" ry="20" fill="#B0A878"/>
+        <ellipse cx="418" cy="558" rx="22" ry="13" fill="#C8BE90"/>
+        <ellipse cx="490" cy="558" rx="22" ry="13" fill="#C8BE90"/>
+        <ellipse cx="435" cy="375" rx="42" ry="38" fill="#C8BE90"/>
+        <ellipse cx="420" cy="308" rx="70" ry="66" fill="#D4CA98"/>
+        <polygon points="362,278 338,220 372,280" fill="#C8BE90"/>
+        <polygon points="366,278 346,232 372,280" fill="#F0C0B0"/>
+        <polygon points="472,272 498,216 476,278" fill="#C8BE90"/>
+        <polygon points="470,275 494,228 474,278" fill="#F0C0B0"/>
+        <path d="M408 285 Q415 270 422 285" fill="none" stroke="#A89870" stroke-width="1.8" opacity="0.55"/>
+        <ellipse cx="393" cy="310" rx="15" ry="10" fill="#2A3A18"/>
+        <ellipse cx="393" cy="307" rx="7" ry="4" fill="#FFFFFF" opacity="0.5"/>
+        <ellipse cx="448" cy="308" rx="13" ry="9" fill="#2A3A18"/>
+        <ellipse cx="447" cy="305" rx="5" ry="3.5" fill="#FFFFFF" opacity="0.5"/>
+        <polygon points="418,330 411,342 425,342" fill="#F09090"/>
+        <path d="M411 342 Q415 350 418 346 Q421 350 425 342" fill="none" stroke="#C06060" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="340" y1="326" x2="405" y2="333" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8"/>
+        <line x1="334" y1="336" x2="403" y2="338" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8"/>
+        <line x1="338" y1="346" x2="404" y2="342" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8"/>
+        <line x1="432" y1="333" x2="496" y2="326" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8"/>
+        <line x1="433" y1="338" x2="500" y2="336" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8"/>
+        <line x1="432" y1="342" x2="498" y2="346" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8"/>
+        <rect x="393" y="358" width="80" height="13" rx="6.5" fill="#1C49C2"/>
+        <circle cx="433" cy="364" r="6" fill="#F5C842"/>
+        <text x="340" y="82" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="36" font-weight="900" fill="#FFFFFF">Picky Eater?</text>
+        <text x="340" y="124" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="36" font-weight="900" fill="#F5E060">Finally Approved.</text>
+        <text x="340" y="165" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="15" fill="#C8DCFF">Organic cat food curated for even the fussiest feline.</text>
+        <ellipse cx="570" cy="340" rx="66" ry="66" fill="#F5C842"/>
+        <text x="570" y="323" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="15" font-weight="900" fill="#1C49C2">20% OFF</text>
+        <text x="570" y="343" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="12" fill="#1C49C2">your first</text>
+        <text x="570" y="360" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="12" fill="#1C49C2">order!</text>
+        <rect x="190" y="590" width="300" height="58" rx="29" fill="#F5C842"/>
+        <text x="340" y="626" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="20" font-weight="900" fill="#1C49C2">Try Your First Box Free</text>
+        <text x="340" y="668" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="13" fill="#FFFFFF" opacity="0.7">chewy.com  •  Where pet lovers shop</text>
+      </svg>
+    </div>
+    <div class="ad-footer">
+      <span class="ad-cta-line">Headline: <strong>"Picky Eater? Finally Approved."</strong></span>
+      <span class="ad-cta-line">CTA: <strong>Try Your First Box Free</strong></span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- AD 3: SMALL ANIMALS -->
+  <div class="ad-block" style="transition-delay:0.2s">
+    <div class="ad-meta">
+      <div>
+        <p class="ad-number">Ad 03 / 03</p>
+        <h3 class="ad-title">The Small Animals Ad</h3>
+        <p class="ad-desc">Celebrating the often-overlooked small pet community. A hamster, mouse, and guinea pig remind owners that little companions deserve the best too.</p>
+      </div>
+      <div class="ad-specs">
+        <span class="spec-pill blue">Feed Post</span>
+        <span class="spec-pill yellow">20% Off</span>
+        <span class="spec-pill green">Small Animals</span>
+      </div>
+    </div>
+    <div class="ad-canvas">
+      <svg viewBox="0 0 680 700" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="hBG" cx="45%" cy="40%" r="55%"><stop offset="0%" stop-color="#F0D4A0"/><stop offset="60%" stop-color="#D4A85C"/><stop offset="100%" stop-color="#B8843A"/></radialGradient>
+          <radialGradient id="hTG" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#FAF0DC"/><stop offset="100%" stop-color="#EDD8A8"/></radialGradient>
+          <radialGradient id="mBG" cx="45%" cy="40%" r="55%"><stop offset="0%" stop-color="#C8C0CC"/><stop offset="100%" stop-color="#8C8498"/></radialGradient>
+          <radialGradient id="gBG" cx="45%" cy="35%" r="60%"><stop offset="0%" stop-color="#C8A84C"/><stop offset="50%" stop-color="#8C6820"/><stop offset="100%" stop-color="#5C4010"/></radialGradient>
+        </defs>
+        <rect width="680" height="700" fill="#1C49C2"/>
+        <ellipse cx="70" cy="90" rx="62" ry="62" fill="#2558D8" opacity="0.55"/>
+        <ellipse cx="615" cy="590" rx="78" ry="78" fill="#2558D8" opacity="0.55"/>
+        <ellipse cx="620" cy="100" rx="40" ry="40" fill="#3A6FE0" opacity="0.35"/>
+        <ellipse cx="90" cy="580" rx="50" ry="50" fill="#3A6FE0" opacity="0.35"/>
+        <ellipse cx="85" cy="200" rx="16" ry="7" fill="#7BBF44" opacity="0.9" transform="rotate(35 85 200)"/>
+        <ellipse cx="596" cy="195" rx="15" ry="6" fill="#5A9E2F" opacity="0.9" transform="rotate(-35 596 195)"/>
+        <ellipse cx="60" cy="470" rx="14" ry="6" fill="#7BBF44" opacity="0.9" transform="rotate(20 60 470)"/>
+        <ellipse cx="620" cy="440" rx="14" ry="6" fill="#5A9E2F" opacity="0.9" transform="rotate(-25 620 440)"/>
+        <ellipse cx="580" cy="55" rx="16" ry="7" fill="#7BBF44" opacity="0.9" transform="rotate(-50 580 55)"/>
+        <rect x="248" y="445" width="184" height="125" rx="8" fill="#F5E6C0" stroke="#C9A84C" stroke-width="2"/>
+        <rect x="248" y="445" width="184" height="35" rx="8" fill="#C9A84C"/>
+        <rect x="248" y="468" width="184" height="12" fill="#C9A84C"/>
+        <text x="340" y="466" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">chewy</text>
+        <rect x="276" y="492" width="128" height="52" rx="6" fill="#FFFFFF" opacity="0.85"/>
+        <text x="340" y="514" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="11" font-weight="700" fill="#1C49C2">ORGANIC</text>
+        <text x="340" y="530" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="9" fill="#3A7A1A">monthly delivery</text>
+        <line x1="340" y1="445" x2="340" y2="570" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+        <line x1="248" y1="480" x2="432" y2="480" stroke="#C9A84C" stroke-width="1.5" opacity="0.4"/>
+        <ellipse cx="338" cy="455" rx="72" ry="14" fill="#0A2A80" opacity="0.22"/>
+        <ellipse cx="282" cy="435" rx="28" ry="22" fill="#C8903A"/>
+        <ellipse cx="396" cy="435" rx="26" ry="20" fill="#C8903A"/>
+        <ellipse cx="338" cy="408" rx="80" ry="62" fill="url(#hBG)"/>
+        <ellipse cx="338" cy="430" rx="52" ry="40" fill="url(#hTG)"/>
+        <ellipse cx="272" cy="372" rx="32" ry="26" fill="#DCA050"/>
+        <ellipse cx="270" cy="370" rx="18" ry="14" fill="#E8B870" opacity="0.5"/>
+        <ellipse cx="406" cy="372" rx="28" ry="23" fill="#DCA050"/>
+        <ellipse cx="405" cy="370" rx="15" ry="12" fill="#E8B870" opacity="0.5"/>
+        <ellipse cx="338" cy="355" rx="58" ry="50" fill="#D8A050"/>
+        <ellipse cx="338" cy="332" rx="62" ry="56" fill="#E8B860"/>
+        <ellipse cx="288" cy="290" rx="22" ry="20" fill="#C07830"/>
+        <ellipse cx="288" cy="290" rx="14" ry="13" fill="#F09888"/>
+        <ellipse cx="390" cy="290" rx="22" ry="20" fill="#C07830"/>
+        <ellipse cx="390" cy="290" rx="14" ry="13" fill="#F09888"/>
+        <ellipse cx="310" cy="334" rx="16" ry="15" fill="#100808"/>
+        <ellipse cx="366" cy="334" rx="14" ry="13" fill="#100808"/>
+        <ellipse cx="304" cy="328" rx="6" ry="5" fill="#FFFFFF" opacity="0.7"/>
+        <ellipse cx="360" cy="328" rx="5" ry="4" fill="#FFFFFF" opacity="0.7"/>
+        <ellipse cx="338" cy="355" rx="9" ry="6" fill="#E87878"/>
+        <path d="M332 365 Q338 372 344 365" fill="none" stroke="#C05858" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="258" y1="354" x2="322" y2="360" stroke="#F5F0E0" stroke-width="0.9" opacity="0.9"/>
+        <line x1="252" y1="362" x2="320" y2="364" stroke="#F5F0E0" stroke-width="0.9" opacity="0.9"/>
+        <line x1="355" y1="360" x2="418" y2="354" stroke="#F5F0E0" stroke-width="0.9" opacity="0.9"/>
+        <line x1="356" y1="364" x2="422" y2="362" stroke="#F5F0E0" stroke-width="0.9" opacity="0.9"/>
+        <ellipse cx="304" cy="450" rx="22" ry="14" fill="#C88030"/>
+        <ellipse cx="373" cy="450" rx="22" ry="14" fill="#C88030"/>
+        <g transform="translate(112, 390)">
+          <ellipse cx="30" cy="78" rx="36" ry="8" fill="#0A2A80" opacity="0.18"/>
+          <ellipse cx="30" cy="52" rx="32" ry="26" fill="url(#mBG)"/>
+          <ellipse cx="30" cy="60" rx="18" ry="16" fill="#EAE4EE"/>
+          <ellipse cx="8" cy="60" rx="15" ry="18" fill="#9C94A8"/>
+          <ellipse cx="52" cy="60" rx="13" ry="16" fill="#9C94A8"/>
+          <ellipse cx="30" cy="24" rx="26" ry="24" fill="#C0B8CC"/>
+          <ellipse cx="30" cy="36" rx="12" ry="9" fill="#D0C8D8"/>
+          <ellipse cx="10" cy="6" rx="14" ry="16" fill="#B0A8BC"/>
+          <ellipse cx="10" cy="6" rx="9" ry="11" fill="#F0BABA" opacity="0.75"/>
+          <ellipse cx="50" cy="6" rx="14" ry="16" fill="#B0A8BC"/>
+          <ellipse cx="50" cy="6" rx="9" ry="11" fill="#F0BABA" opacity="0.75"/>
+          <circle cx="18" cy="22" r="7" fill="#080408"/>
+          <circle cx="15" cy="19" r="2.5" fill="#FFFFFF" opacity="0.7"/>
+          <circle cx="42" cy="22" r="6" fill="#080408"/>
+          <circle cx="39" cy="19" r="2" fill="#FFFFFF" opacity="0.7"/>
+          <ellipse cx="30" cy="38" rx="4" ry="3" fill="#E07878"/>
+          <line x1="-8" y1="34" x2="18" y2="38" stroke="#FFFFFF" stroke-width="0.7" opacity="0.85"/>
+          <line x1="-10" y1="39" x2="17" y2="40" stroke="#FFFFFF" stroke-width="0.7" opacity="0.85"/>
+          <line x1="43" y1="38" x2="68" y2="34" stroke="#FFFFFF" stroke-width="0.7" opacity="0.85"/>
+          <line x1="43" y1="40" x2="70" y2="39" stroke="#FFFFFF" stroke-width="0.7" opacity="0.85"/>
+          <path d="M62 55 Q110 50 125 20 Q135 0 120 -15" fill="none" stroke="#B0A0BC" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(472, 382)">
+          <ellipse cx="48" cy="88" rx="52" ry="10" fill="#0A2A80" opacity="0.18"/>
+          <ellipse cx="48" cy="60" rx="54" ry="38" fill="url(#gBG)"/>
+          <ellipse cx="28" cy="48" rx="24" ry="22" fill="#F0E8D0"/>
+          <ellipse cx="68" cy="55" rx="20" ry="18" fill="#1A1008" opacity="0.65"/>
+          <ellipse cx="18" cy="82" rx="14" ry="7" fill="#7C5818"/>
+          <ellipse cx="40" cy="86" rx="13" ry="7" fill="#6C4C10"/>
+          <ellipse cx="60" cy="86" rx="13" ry="7" fill="#6C4C10"/>
+          <ellipse cx="80" cy="82" rx="14" ry="7" fill="#7C5818"/>
+          <ellipse cx="48" cy="28" rx="44" ry="36" fill="#C09040"/>
+          <ellipse cx="48" cy="32" rx="20" ry="24" fill="#E8D8A0"/>
+          <ellipse cx="12" cy="18" rx="12" ry="11" fill="#9C7228"/>
+          <ellipse cx="12" cy="18" rx="7" ry="6" fill="#E09090" opacity="0.7"/>
+          <ellipse cx="84" cy="18" rx="12" ry="11" fill="#9C7228"/>
+          <ellipse cx="84" cy="18" rx="7" ry="6" fill="#E09090" opacity="0.7"/>
+          <ellipse cx="30" cy="28" rx="12" ry="11" fill="#080408"/>
+          <ellipse cx="27" cy="25" rx="4" ry="3.5" fill="#FFFFFF" opacity="0.7"/>
+          <ellipse cx="66" cy="28" rx="11" ry="10" fill="#080408"/>
+          <ellipse cx="63" cy="25" rx="3.5" ry="3" fill="#FFFFFF" opacity="0.7"/>
+          <ellipse cx="48" cy="44" rx="7" ry="5" fill="#D07070"/>
+          <path d="M42 48 Q48 54 54 48" fill="none" stroke="#B05050" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="8" y1="42" x2="40" y2="46" stroke="#F5F0E0" stroke-width="0.8" opacity="0.8"/>
+          <line x1="6" y1="48" x2="39" y2="48" stroke="#F5F0E0" stroke-width="0.8" opacity="0.8"/>
+          <line x1="57" y1="46" x2="88" y2="42" stroke="#F5F0E0" stroke-width="0.8" opacity="0.8"/>
+          <line x1="57" y1="48" x2="90" y2="48" stroke="#F5F0E0" stroke-width="0.8" opacity="0.8"/>
+        </g>
+        <text x="340" y="80" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="34" font-weight="900" fill="#FFFFFF">Big Love for</text>
+        <text x="340" y="120" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="34" font-weight="900" fill="#F5E060">Little Ones.</text>
+        <text x="340" y="160" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="15" fill="#C8DCFF">Organic food boxes for hamsters, guinea pigs &amp; more.</text>
+        <ellipse cx="562" cy="348" rx="62" ry="62" fill="#F5C842"/>
+        <text x="562" y="333" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="14" font-weight="900" fill="#1C49C2">20% OFF</text>
+        <text x="562" y="351" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="11" fill="#1C49C2">your first</text>
+        <text x="562" y="368" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="11" fill="#1C49C2">order!</text>
+        <rect x="190" y="585" width="300" height="58" rx="29" fill="#F5C842"/>
+        <text x="340" y="621" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="20" font-weight="900" fill="#1C49C2">Try Your First Box Free</text>
+        <text x="340" y="662" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="13" fill="#FFFFFF" opacity="0.7">chewy.com  •  Where pet lovers shop</text>
+      </svg>
+    </div>
+    <div class="ad-footer">
+      <span class="ad-cta-line">Headline: <strong>"Big Love for Little Ones."</strong></span>
+      <span class="ad-cta-line">CTA: <strong>Try Your First Box Free</strong></span>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">chewy<span>.</span></div>
+  <p>Organic Food Subscription Box — Campaign Portfolio · 2025</p>
+  <p style="margin-top:6px">Where pet lovers shop</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.brief-card, .ad-block').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

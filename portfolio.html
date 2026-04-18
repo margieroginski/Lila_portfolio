@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --yellow: #E8D84B;
+    --yellow-dark: #C9BA2A;
+    --cream: #F7F4EE;
+    --ink: #1A1814;
+    --ink-light: #3A3630;
+    --chewy-blue: #1C49C2;
+    --chewy-green: #4A8C3F;
+    --chewy-earth: #C8A84B;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(247, 244, 238, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(26,24,20,0.08);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--ink-light); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    padding: 7rem 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  /* Background blobs */
+  .hero-blobs {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .blob {
+    position: absolute;
+    background: var(--yellow);
+    border-radius: 50%;
+  }
+  .blob-1 { width: 420px; height: 420px; top: -80px; right: 8%; transform: scaleX(0.7); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+  .blob-2 { width: 340px; height: 340px; bottom: -60px; right: 22%; }
+  .blob-3 { width: 180px; height: 180px; top: 15%; left: 42%; }
+  .blob-4 { width: 260px; height: 260px; top: 5%; right: 3%; border-radius: 50% 30% 50% 30%; }
+
+  /* Photo frame */
+  .hero-photo {
+    position: absolute;
+    right: 6%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    height: 420px;
+    border-radius: 160px 160px 160px 160px;
+    overflow: hidden;
+    z-index: 2;
+    background: #b5c4d8;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-photo-placeholder {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .hero-content { position: relative; z-index: 3; max-width: 580px; }
+  
+  .hero-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s forwards;
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--ink-light); }
+  .hero-title .accent-word {
+    position: relative; display: inline-block;
+  }
+  .hero-title .accent-word::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 2px;
+    height: 14px;
+    background: var(--yellow);
+    z-index: -1;
+    transform: skewX(-3deg);
+  }
+
+  .hero-body {
+    font-size: 1.05rem; line-height: 1.75; color: #5A574F;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1rem 2rem;
+    border-radius: 60px;
+    font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.55s forwards;
+  }
+  .hero-cta:hover { background: var(--ink-light); transform: translateY(-2px); }
+  .hero-cta .arrow {
+    width: 28px; height: 28px; background: var(--yellow); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner { display: inline-flex; gap: 0; animation: ticker 22s linear infinite; }
+  .ticker-item {
+    font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0 2.5rem;
+  }
+  .ticker-dot { color: var(--yellow); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── WORK SECTION ── */
+  .work {
+    padding: 6rem 3rem;
+  }
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(26,24,20,0.12);
+    padding-bottom: 1.5rem;
+  }
+  .section-label {
+    font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light);
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    letter-spacing: -0.02em;
+  }
+  .section-count { font-family: 'Syne', sans-serif; font-size: 0.85rem; color: #888; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Project Cards */
+  .project-card {
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+  .project-card:hover { transform: translateY(-6px) scale(1.01); }
+
+  .card-visual {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-meta {
+    padding: 1.25rem 1.5rem 1.5rem;
+    background: white;
+  }
+  .card-tags {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+  .tag {
+    font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--cream);
+    color: var(--ink-light);
+  }
+  .card-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.35rem;
+  }
+  .card-sub { font-size: 0.85rem; color: #7A776F; line-height: 1.5; }
+
+  /* ══ CARD 1: Chewy ══ */
+  .card-chewy .card-visual { background: var(--chewy-blue); }
+  .chewy-scene {
+    width: 100%; height: 100%;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* animated sun rays */
+  .chewy-rays {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .chewy-rays svg { width: 280px; height: 280px; opacity: 0.15; animation: spin 30s linear infinite; }
+
+  .chewy-box {
+    position: relative; z-index: 2;
+    width: 120px; height: 100px;
+  }
+  .chewy-box svg { width: 100%; height: 100%; }
+
+  .chewy-pets {
+    position: absolute; z-index: 3;
+    bottom: 20px; width: 100%;
+    display: flex; justify-content: space-around; padding: 0 20px;
+  }
+
+  /* ══ CARD 2: Branding ══ */
+  .card-brand .card-visual { background: #2A1F3D; }
+  .brand-scene {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .brand-circle {
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  /* ══ CARD 3: Web Design ══ */
+  .card-web .card-visual { background: #F0EBE3; }
+  .web-scene {
+    width: 100%; height: 100%;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 0;
+    position: relative;
+  }
+  .web-mockup {
+    width: 200px;
+    background: white;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.12);
+  }
+  .web-bar { height: 28px; background: #1A1814; display: flex; align-items: center; gap: 6px; padding: 0 12px; }
+  .web-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .web-body { padding: 12px; }
+  .web-line { height: 6px; border-radius: 3px; background: #E8E4DC; margin-bottom: 8px; }
+  .web-line.short { width: 60%; }
+  .web-line.shorter { width: 40%; }
+  .web-hero-img { height: 50px; background: #E8D84B; border-radius: 6px; margin-bottom: 8px; }
+
+  /* ══ CARD 4: Motion / wide ══ */
+  .card-motion {
+    grid-column: span 2;
+  }
+  .card-motion .card-visual { height: 220px; background: #0D0D0D; }
+  .motion-scene {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; gap: 16px;
+  }
+  .motion-ring {
+    border-radius: 50%;
+    border: 2px solid rgba(232,216,75,0.5);
+    position: absolute;
+    animation: pulse-ring 3s ease-out infinite;
+  }
+  .motion-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem; color: white; z-index: 2;
+    letter-spacing: -0.03em;
+    animation: flicker 6s ease-in-out infinite;
+  }
+  .motion-accent { color: var(--yellow); font-style: italic; }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.6); opacity: 0.8; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  @keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.6; }
+    98% { opacity: 0.9; }
+  }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* ══ CARD 5: Photography ══ */
+  .card-photo .card-visual { background: #8B7355; }
+  .photo-scene {
+    width: 100%; height: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+    gap: 3px; padding: 3px;
+  }
+  .photo-swatch { border-radius: 6px; }
+
+  /* ── CHEWY MODAL / DETAIL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(10,8,6,0.75);
+    backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--cream);
+    width: min(920px, 95vw);
+    max-height: 90vh;
+    border-radius: 24px;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.92) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: sticky; top: 1.5rem;
+    float: right; margin: 1.5rem 1.5rem 0 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+  }
+  .modal-close:hover { background: #333; }
+
+  .modal-hero {
+    height: 340px;
+    background: var(--chewy-blue);
+    border-radius: 24px 24px 0 0;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .ad-container {
+    display: flex; gap: 2rem; align-items: flex-start;
+    padding: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .ad-square {
+    width: 280px; height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 16px 48px rgba(28,73,194,0.25);
+  }
+  .ad-story {
+    width: 157px; height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 16px 48px rgba(28,73,194,0.25);
+  }
+
+  .modal-info { flex: 1; min-width: 240px; }
+  .modal-brand {
+    font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--chewy-blue); margin-bottom: 0.5rem;
+  }
+  .modal-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .modal-body { font-size: 0.95rem; line-height: 1.75; color: #5A574F; margin-bottom: 1.5rem; }
+  .modal-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .pill {
+    font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px;
+    background: rgba(28,73,194,0.1); color: var(--chewy-blue);
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 5rem 3rem;
+    background: var(--ink);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .about-label {
+    font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--yellow); margin-bottom: 1.25rem;
+  }
+  .about-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.15; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .about-title em { color: var(--yellow); }
+  .about-body { font-size: 0.95rem; line-height: 1.8; color: rgba(247,244,238,0.65); margin-bottom: 2rem; }
+  .about-stats { display: flex; gap: 2.5rem; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif; font-size: 2.4rem;
+    color: var(--yellow); letter-spacing: -0.03em;
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(247,244,238,0.5); margin-top: 2px; }
+
+  .skills-list { display: flex; flex-direction: column; gap: 1rem; }
+  .skill-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+  }
+  .skill-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--yellow); display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .skill-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .skill-desc { font-size: 0.8rem; color: rgba(247,244,238,0.5); margin-top: 1px; }
+  .skill-bar-wrap { margin-left: auto; width: 80px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .skill-bar { height: 100%; background: var(--yellow); border-radius: 2px; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(26,24,20,0.1);
+    background: var(--cream);
+  }
+  .footer-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; }
+  .footer-copy { font-size: 0.8rem; color: #9A978F; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.85rem; color: #7A776F; text-decoration: none; }
+  .footer-links a:hover { color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-photo { display: none; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .card-motion { grid-column: span 2; }
+    .about { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .work, .about { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">your name.</span>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:hello@yourname.com">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <div class="hero-photo" aria-hidden="true">
+    <div class="hero-photo-placeholder">Your photo here</div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Creative Designer &amp; Art Director</p>
+    <h1 class="hero-title">
+      Take your brand's <em>visual</em><br>
+      story to the<br>
+      <span class="accent-word">next level</span>
+    </h1>
+    <p class="hero-body">
+      I'm a creative designer with 8+ years helping brands build identities that people actually remember. From campaign concepts to digital experiences — I craft work that connects.
+    </p>
+    <a href="#work" class="hero-cta">
+      View my work
+      <span class="arrow">↓</span>
+    </a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Brand Identity <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Campaign Design <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Social Media Ads <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Art Direction <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Illustration <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Motion Design <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Brand Identity <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Campaign Design <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Social Media Ads <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Art Direction <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Illustration <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Motion Design <span class="ticker-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Selected work</p>
+      <h2 class="section-title">Recent projects</h2>
+    </div>
+    <span class="section-count">05 projects</span>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- CARD 1: CHEWY -->
+    <div class="project-card card-chewy" onclick="openModal('chewy')" role="button" tabindex="0" aria-label="View Chewy Organic Campaign">
+      <div class="card-visual">
+        <div class="chewy-scene">
+          <div class="chewy-rays">
+            <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(140,140)">
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(30)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(60)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(90)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(120)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(150)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(180)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(210)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(240)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(270)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(300)"/>
+                <line x1="0" y1="-130" x2="0" y2="-60" stroke="white" stroke-width="12" stroke-linecap="round" transform="rotate(330)"/>
+              </g>
+            </svg>
+          </div>
+          <!-- Chewy Subscription Box SVG -->
+          <svg width="130" height="120" viewBox="0 0 130 120" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:2">
+            <!-- Box body -->
+            <rect x="15" y="40" width="100" height="75" rx="6" fill="white"/>
+            <!-- Box flap -->
+            <path d="M15 40 L65 15 L115 40 Z" fill="#E8E0D0"/>
+            <!-- Chewy logo area -->
+            <rect x="35" y="60" width="60" height="28" rx="4" fill="#1C49C2"/>
+            <text x="65" y="80" text-anchor="middle" font-family="'Syne',sans-serif" font-size="11" font-weight="800" fill="white">chewy</text>
+            <!-- Leaf decoration -->
+            <path d="M40 95 Q50 82 60 95 Q50 100 40 95Z" fill="#4A8C3F"/>
+            <path d="M68 95 Q78 82 88 95 Q78 100 68 95Z" fill="#4A8C3F"/>
+            <!-- Paw print -->
+            <circle cx="65" cy="108" r="3" fill="#C8A84B"/>
+            <circle cx="59" cy="104" r="2" fill="#C8A84B"/>
+            <circle cx="71" cy="104" r="2" fill="#C8A84B"/>
+          </svg>
+          <!-- Dog SVG -->
+          <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:14px;left:16px;z-index:3">
+            <circle cx="30" cy="24" r="14" fill="#F5C57A"/>
+            <ellipse cx="20" cy="18" rx="6" ry="10" fill="#E8A850" transform="rotate(-20,20,18)"/>
+            <ellipse cx="40" cy="18" rx="6" ry="10" fill="#E8A850" transform="rotate(20,40,18)"/>
+            <circle cx="26" cy="22" r="3" fill="white"/><circle cx="34" cy="22" r="3" fill="white"/>
+            <circle cx="27" cy="22" r="1.5" fill="#1A1814"/><circle cx="35" cy="22" r="1.5" fill="#1A1814"/>
+            <ellipse cx="30" cy="27" rx="4" ry="2.5" fill="#E8936A"/>
+            <path d="M27 29 Q30 32 33 29" stroke="#1A1814" stroke-width="1.2" fill="none"/>
+            <rect x="18" y="36" width="24" height="20" rx="8" fill="#F5C57A"/>
+            <line x1="26" y1="36" x2="23" y2="56" stroke="#E8A850" stroke-width="5" stroke-linecap="round"/>
+            <line x1="34" y1="36" x2="37" y2="56" stroke="#E8A850" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <!-- Cat SVG -->
+          <svg width="55" height="55" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:16px;right:16px;z-index:3">
+            <circle cx="27" cy="22" r="13" fill="#E8D5B0"/>
+            <path d="M16 12 L13 2 L22 10 Z" fill="#D4C09A"/>
+            <path d="M38 12 L42 2 L33 10 Z" fill="#D4C09A"/>
+            <circle cx="23" cy="20" r="3" fill="white"/><circle cx="31" cy="20" r="3" fill="white"/>
+            <circle cx="24" cy="20" r="1.5" fill="#1A1814"/><circle cx="32" cy="20" r="1.5" fill="#1A1814"/>
+            <circle cx="27" cy="24" r="2" fill="#E8936A"/>
+            <path d="M23 26 Q27 29 31 26" stroke="#1A1814" stroke-width="1.2" fill="none"/>
+            <line x1="14" y1="24" x2="22" y2="24" stroke="#999" stroke-width="0.8"/>
+            <line x1="33" y1="24" x2="41" y2="24" stroke="#999" stroke-width="0.8"/>
+            <rect x="16" y="33" width="22" height="18" rx="8" fill="#E8D5B0"/>
+            <path d="M36 38 Q45 35 44 50 Q38 48 36 38Z" fill="#D4C09A"/>
+            <line x1="24" y1="33" x2="22" y2="51" stroke="#D4C09A" stroke-width="4" stroke-linecap="round"/>
+            <line x1="30" y1="33" x2="32" y2="51" stroke="#D4C09A" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="tag" style="background:#E6EDF9;color:#1C49C2">Chewy</span>
+          <span class="tag">Social Ads</span>
+          <span class="tag">Campaign</span>
+        </div>
+        <p class="card-name">Organic Subscription Campaign</p>
+        <p class="card-sub">Social media ads for Chewy's new organic pet food box launch</p>
+      </div>
+    </div>
+
+    <!-- CARD 2: Brand Identity -->
+    <div class="project-card card-brand">
+      <div class="card-visual">
+        <div class="brand-scene">
+          <div class="brand-circle" style="width:200px;height:200px;background:rgba(232,216,75,0.15);"></div>
+          <div class="brand-circle" style="width:140px;height:140px;background:rgba(232,216,75,0.2);"></div>
+          <div class="brand-circle" style="width:80px;height:80px;background:#E8D84B;"></div>
+          <svg width="160" height="80" viewBox="0 0 160 80" style="position:absolute;z-index:2" xmlns="http://www.w3.org/2000/svg">
+            <text x="80" y="30" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="22" fill="white" font-style="italic">Lumière</text>
+            <text x="80" y="52" text-anchor="middle" font-family="'Syne',sans-serif" font-size="8" fill="rgba(255,255,255,0.5)" letter-spacing="5">STUDIO</text>
+            <line x1="30" y1="62" x2="130" y2="62" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+            <text x="80" y="74" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7" fill="rgba(255,255,255,0.3)" letter-spacing="3">EST. MMXXIII</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags"><span class="tag">Branding</span><span class="tag">Identity</span></div>
+        <p class="card-name">Lumière Studio</p>
+        <p class="card-sub">Full brand identity system for a luxury photography studio</p>
+      </div>
+    </div>
+
+    <!-- CARD 3: Web Design -->
+    <div class="project-card card-web">
+      <div class="card-visual">
+        <div class="web-scene">
+          <div class="web-mockup">
+            <div class="web-bar">
+              <div class="web-dot" style="background:#FF6B6B"></div>
+              <div class="web-dot" style="background:#FFD93D"></div>
+              <div class="web-dot" style="background:#6BCB77"></div>
+            </div>
+            <div class="web-body">
+              <div class="web-hero-img"></div>
+              <div class="web-line"></div>
+              <div class="web-line short"></div>
+              <div class="web-line shorter"></div>
+              <div style="height:20px;background:#1A1814;border-radius:10px;width:80px;margin-top:10px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags"><span class="tag">Web Design</span><span class="tag">UI/UX</span></div>
+        <p class="card-name">Harvest Co. Website</p>
+        <p class="card-sub">E-commerce redesign for an organic food marketplace</p>
+      </div>
+    </div>
+
+    <!-- CARD 4: Motion (wide) -->
+    <div class="project-card card-motion">
+      <div class="card-visual">
+        <div class="motion-scene">
+          <div class="motion-ring" style="width:80px;height:80px;animation-delay:0s"></div>
+          <div class="motion-ring" style="width:80px;height:80px;animation-delay:1s"></div>
+          <div class="motion-ring" style="width:80px;height:80px;animation-delay:2s"></div>
+          <div class="motion-text">Motion <span class="motion-accent">in</span> design</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags"><span class="tag">Motion</span><span class="tag">Animation</span><span class="tag">Video</span></div>
+        <p class="card-name">Kinetic Brand Films</p>
+        <p class="card-sub">Animated brand stories and motion graphics for digital campaigns</p>
+      </div>
+    </div>
+
+    <!-- CARD 5: Photography / Editorial -->
+    <div class="project-card card-photo">
+      <div class="card-visual">
+        <div class="photo-scene">
+          <div class="photo-swatch" style="background:#C9A87C;grid-row:span 2;"></div>
+          <div class="photo-swatch" style="background:#8B7355;"></div>
+          <div class="photo-swatch" style="background:#4A3728;"></div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-tags"><span class="tag">Editorial</span><span class="tag">Print</span></div>
+        <p class="card-name">Terrain Magazine</p>
+        <p class="card-sub">Editorial art direction and layout for a quarterly print publication</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div>
+    <p class="about-label">About me</p>
+    <h2 class="about-title">Design that <em>feels</em> as good as it looks</h2>
+    <p class="about-body">
+      I believe great design lives at the intersection of strategy and craft. I partner with brands to create visual systems that aren't just beautiful — they're built to move people. Whether it's a social campaign, a brand refresh, or a product launch, I bring curiosity and precision to every pixel.
+    </p>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div>
+        <div class="stat-num">60+</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div>
+        <div class="stat-num">24</div>
+        <div class="stat-label">Brand clients</div>
+      </div>
+    </div>
+  </div>
+  <div class="skills-list">
+    <div class="skill-item">
+      <div class="skill-icon">✦</div>
+      <div>
+        <div class="skill-name">Brand Identity</div>
+        <div class="skill-desc">Logo systems, visual language, guidelines</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">◈</div>
+      <div>
+        <div class="skill-name">Campaign Design</div>
+        <div class="skill-desc">Social, OOH, digital advertising</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">⬡</div>
+      <div>
+        <div class="skill-name">Illustration</div>
+        <div class="skill-desc">Flat, editorial & character design</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">▶</div>
+      <div>
+        <div class="skill-name">Motion Design</div>
+        <div class="skill-desc">After Effects, Rive, CSS animation</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">your name.</span>
+  <span class="footer-copy">© 2026 — All rights reserved</span>
+  <div class="footer-links">
+    <a href="#">LinkedIn</a>
+    <a href="#">Dribbble</a>
+    <a href="#">Instagram</a>
+  </div>
+</footer>
+
+<!-- CHEWY MODAL -->
+<div class="modal-overlay" id="chewy-modal" onclick="handleOverlayClick(event)" role="dialog" aria-modal="true" aria-label="Chewy Campaign Details">
+  <div class="modal" style="max-width:960px">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+
+    <div class="modal-hero">
+      <svg width="100%" height="100%" viewBox="0 0 920 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+        <rect width="920" height="300" fill="#1C49C2"/>
+        <circle cx="820" cy="30" r="180" fill="rgba(255,255,255,0.05)"/>
+        <circle cx="80" cy="280" r="160" fill="rgba(74,140,63,0.12)"/>
+        <ellipse cx="460" cy="320" rx="300" ry="100" fill="rgba(74,140,63,0.1)"/>
+      </svg>
+      <div style="position:relative;z-index:2;text-align:center;padding:0 2rem">
+        <p style="font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:0.6rem">Chewy · Social Media Campaign · 2025</p>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:2.6rem;color:white;letter-spacing:-0.02em;margin-bottom:0.4rem">Organic Food Subscription Box</h2>
+        <p style="font-family:'DM Sans',sans-serif;font-size:1rem;color:rgba(255,255,255,0.65);max-width:540px;margin:0 auto 1.25rem">A social media ad campaign introducing Chewy's new organic food subscription — crafted for health-conscious pet lovers everywhere.</p>
+        <a href="https://thriving-panda-651cae.netlify.app/" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:0.5rem 1.25rem;border-radius:30px;font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-decoration:none;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">View Live Campaign ↗</a>
+      </div>
+    </div>
+
+    <!-- Campaign overview strips -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid rgba(26,24,20,0.1)">
+      <div style="padding:1.25rem 1.5rem;border-right:1px solid rgba(26,24,20,0.08)">
+        <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin-bottom:0.35rem">Campaign Goal</p>
+        <p style="font-size:0.88rem;line-height:1.5;color:#3A3630">Launch the Organic Subscription Box and drive first-time subscribers with a 20% introductory offer.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem;border-right:1px solid rgba(26,24,20,0.08)">
+        <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin-bottom:0.35rem">Audience</p>
+        <p style="font-size:0.88rem;line-height:1.5;color:#3A3630">Health-conscious pet owners who prioritise organic, clean-ingredient food for dogs, cats & small animals.</p>
+      </div>
+      <div style="padding:1.25rem 1.5rem">
+        <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin-bottom:0.35rem">Creative Direction</p>
+        <p style="font-size:0.88rem;line-height:1.5;color:#3A3630">Bold flat illustration, Chewy Blue as hero color, warm organic greens, and playful expressive animals.</p>
+      </div>
+    </div>
+
+    <!-- Ad variants header -->
+    <div style="padding:2rem 2rem 1rem">
+      <p style="font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888;margin-bottom:0.25rem">Three variants. One campaign.</p>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:1.5rem;letter-spacing:-0.01em">The Ads</h3>
+    </div>
+
+    <!-- Three ad variant cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;padding:0 2rem 2.5rem">
+
+      <!-- Dog Ad -->
+      <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,24,20,0.08)">
+        <div style="background:#1C49C2;padding:1.5rem 1rem 1rem;text-align:center;position:relative;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 10px;font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:white;letter-spacing:0.05em">20% OFF</div>
+          <!-- Dog illustration -->
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px">
+            <circle cx="40" cy="32" r="22" fill="#F5C57A"/>
+            <ellipse cx="24" cy="22" rx="10" ry="16" fill="#E8A850" transform="rotate(-18,24,22)"/>
+            <ellipse cx="56" cy="22" rx="10" ry="16" fill="#E8A850" transform="rotate(18,56,22)"/>
+            <circle cx="33" cy="30" r="5.5" fill="white"/><circle cx="47" cy="30" r="5.5" fill="white"/>
+            <circle cx="34" cy="30" r="2.8" fill="#1A1814"/><circle cx="48" cy="30" r="2.8" fill="#1A1814"/>
+            <ellipse cx="40" cy="37" rx="6" ry="4" fill="#E8936A"/>
+            <path d="M35 41 Q40 46 45 41" stroke="#1A1814" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <rect x="22" y="52" width="36" height="26" rx="12" fill="#F5C57A"/>
+            <line x1="32" y1="52" x2="28" y2="78" stroke="#E8A850" stroke-width="7" stroke-linecap="round"/>
+            <line x1="48" y1="52" x2="52" y2="78" stroke="#E8A850" stroke-width="7" stroke-linecap="round"/>
+          </svg>
+          <p style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:white;font-style:italic;line-height:1.2;margin-bottom:4px">Real Food.<br>Real Happy.</p>
+          <p style="font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase">Dogs</p>
+        </div>
+        <div style="padding:1rem 1.1rem;background:white">
+          <p style="font-family:'Syne',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1C49C2;margin-bottom:0.35rem">Ad 01 / 03 — The Dog Ad</p>
+          <p style="font-size:0.82rem;line-height:1.55;color:#5A574F">Warm, joyful energy targeting dog owners. The golden retriever's enthusiasm mirrors how dogs feel about mealtime — pure happiness.</p>
+          <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#1A1814;margin-top:0.75rem">CTA: Try Your First Box Free</p>
+        </div>
+      </div>
+
+      <!-- Cat Ad -->
+      <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,24,20,0.08)">
+        <div style="background:#1C49C2;padding:1.5rem 1rem 1rem;text-align:center;position:relative;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 10px;font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:white;letter-spacing:0.05em">20% OFF</div>
+          <!-- Cat illustration -->
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px">
+            <circle cx="40" cy="32" r="20" fill="#E8D5B0"/>
+            <path d="M24 20 L19 6 L32 18Z" fill="#D4C09A"/>
+            <path d="M56 20 L61 6 L48 18Z" fill="#D4C09A"/>
+            <circle cx="33" cy="30" r="5" fill="white"/><circle cx="47" cy="30" r="5" fill="white"/>
+            <circle cx="34" cy="30" r="2.5" fill="#2A1F4A"/><circle cx="48" cy="30" r="2.5" fill="#2A1F4A"/>
+            <circle cx="40" cy="35" r="3" fill="#E8936A"/>
+            <path d="M35 39 Q40 43 45 39" stroke="#1A1814" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <line x1="18" y1="32" x2="30" y2="33" stroke="#bbb" stroke-width="1"/><line x1="50" y1="33" x2="62" y2="32" stroke="#bbb" stroke-width="1"/>
+            <rect x="24" y="50" width="32" height="26" rx="12" fill="#E8D5B0"/>
+            <path d="M52 55 Q66 50 65 72 Q57 68 52 55Z" fill="#D4C09A"/>
+            <line x1="33" y1="50" x2="30" y2="76" stroke="#D4C09A" stroke-width="6" stroke-linecap="round"/>
+            <line x1="47" y1="50" x2="50" y2="76" stroke="#D4C09A" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <p style="font-family:'DM Serif Display',serif;font-size:1.05rem;color:white;font-style:italic;line-height:1.2;margin-bottom:4px">Picky Eater?<br>Finally Approved.</p>
+          <p style="font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase">Cats</p>
+        </div>
+        <div style="padding:1rem 1.1rem;background:white">
+          <p style="font-family:'Syne',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1C49C2;margin-bottom:0.35rem">Ad 02 / 03 — The Cat Ad</p>
+          <p style="font-size:0.82rem;line-height:1.55;color:#5A574F">Dry wit for cat owners. The slightly smug tabby taps into the universal truth that cats are notoriously hard to please — until now.</p>
+          <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#1A1814;margin-top:0.75rem">CTA: Try Your First Box Free</p>
+        </div>
+      </div>
+
+      <!-- Small Animals Ad -->
+      <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,24,20,0.08)">
+        <div style="background:#1C49C2;padding:1.5rem 1rem 1rem;text-align:center;position:relative;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 10px;font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:white;letter-spacing:0.05em">20% OFF</div>
+          <!-- Small animals: hamster + guinea pig -->
+          <svg width="80" height="70" viewBox="0 0 80 70" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px">
+            <!-- Hamster left -->
+            <circle cx="22" cy="38" r="14" fill="#F5C57A"/>
+            <ellipse cx="14" cy="28" rx="6" ry="9" fill="#E8A850" transform="rotate(-20,14,28)"/>
+            <ellipse cx="30" cy="28" rx="6" ry="9" fill="#E8A850" transform="rotate(20,30,28)"/>
+            <circle cx="18" cy="36" r="3" fill="white"/><circle cx="26" cy="36" r="3" fill="white"/>
+            <circle cx="19" cy="36" r="1.5" fill="#1A1814"/><circle cx="27" cy="36" r="1.5" fill="#1A1814"/>
+            <ellipse cx="22" cy="40" rx="3.5" ry="2" fill="#F5A07A"/>
+            <path d="M19 43 Q22 46 25 43" stroke="#1A1814" stroke-width="1.2" fill="none"/>
+            <!-- Guinea pig right -->
+            <ellipse cx="58" cy="42" rx="16" ry="12" fill="#C8A870"/>
+            <circle cx="58" cy="32" r="10" fill="#D4B880"/>
+            <ellipse cx="50" cy="26" rx="5" ry="7" fill="#C4A860" transform="rotate(-10,50,26)"/>
+            <ellipse cx="66" cy="26" rx="5" ry="7" fill="#C4A860" transform="rotate(10,66,26)"/>
+            <circle cx="55" cy="31" r="2.5" fill="white"/><circle cx="61" cy="31" r="2.5" fill="white"/>
+            <circle cx="55.5" cy="31" r="1.2" fill="#1A1814"/><circle cx="61.5" cy="31" r="1.2" fill="#1A1814"/>
+            <ellipse cx="58" cy="34" rx="2.5" ry="1.5" fill="#E8936A"/>
+          </svg>
+          <p style="font-family:'DM Serif Display',serif;font-size:1.05rem;color:white;font-style:italic;line-height:1.2;margin-bottom:4px">Big Love for<br>Little Ones.</p>
+          <p style="font-family:'Syne',sans-serif;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase">Small Animals</p>
+        </div>
+        <div style="padding:1rem 1.1rem;background:white">
+          <p style="font-family:'Syne',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1C49C2;margin-bottom:0.35rem">Ad 03 / 03 — The Small Animals Ad</p>
+          <p style="font-size:0.82rem;line-height:1.55;color:#5A574F">Celebrating the often-overlooked small pet community. A hamster and guinea pig remind owners that little companions deserve the best too.</p>
+          <p style="font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#1A1814;margin-top:0.75rem">CTA: Try Your First Box Free</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer row -->
+    <div style="padding:1.25rem 2rem;border-top:1px solid rgba(26,24,20,0.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <span class="pill">Social Ads</span>
+        <span class="pill">1080×1080</span>
+        <span class="pill">Flat Illustration</span>
+        <span class="pill">Art Direction</span>
+        <span class="pill">3 Variants</span>
+      </div>
+      <a href="https://thriving-panda-651cae.netlify.app/" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:#1C49C2;color:white;padding:0.6rem 1.4rem;border-radius:30px;font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.03em;text-decoration:none">View Full Campaign ↗</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openModal(id) {
+    const modal = document.getElementById(id + '-modal');
+    if (modal) {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function closeModal() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === e.currentTarget) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Keyboard accessibility for project cards
+  document.querySelectorAll('.project-card[tabindex]').forEach(card => {
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
+</script>
+</body>
+</html>
