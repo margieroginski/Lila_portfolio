@@ -6,900 +6,874 @@
 <title>Lila Roginski — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
- *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --yellow: #E8D84B;
+    --yellow-dark: #C9BA2A;
+    --cream: #F7F4EE;
+    --ink: #1A1814;
+    --ink-light: #3A3630;
+    --white: #FFFFFF;
+  }
 
- :root {
-   --yellow: #E8D84B;
-   --yellow-dark: #C9BA2A;
-   --cream: #F7F4EE;
-   --ink: #1A1814;
-   --ink-light: #3A3630;
-   --white: #FFFFFF;
- }
+  html { scroll-behavior: smooth; }
 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
 
- html { scroll-behavior: smooth; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(247, 244, 238, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(26,24,20,0.08);
+    max-width: 1400px;
+    margin: 0 auto;
+    left: 50%; transform: translateX(-50%);
+    width: 100%;
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--ink-light); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
 
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    padding: 7rem 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hero-blobs { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .blob { position: absolute; background: var(--yellow); border-radius: 50%; }
+  .blob-tl { width: 500px; height: 500px; top: -200px; right: 5%; }
+  .blob-bl { width: 420px; height: 420px; bottom: -180px; right: 28%; }
+  .blob-tr { width: 280px; height: 280px; top: 45%; right: -60px; }
 
- body {
-   font-family: 'DM Sans', sans-serif;
-   background: var(--cream);
-   color: var(--ink);
-   overflow-x: hidden;
- }
+  .hero-photo {
+    position: absolute;
+    right: 22%; top: 50%;
+    transform: translateY(-50%);
+    width: 32vw; height: 32vw;
+    max-width: 420px; max-height: 420px;
+    min-width: 280px; min-height: 280px;
+    border-radius: 50%;
+    overflow: hidden; z-index: 2;
+    background: #b5c4d8;
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
+  .hero-content { position: relative; z-index: 3; max-width: 520px; }
+  .hero-eyebrow {
+    font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light);
+    margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    line-height: 1.05; letter-spacing: -0.02em; color: var(--ink);
+    margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--ink-light); }
+  .hero-title .accent-word { position: relative; display: inline-block; }
+  .hero-title .accent-word::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 2px;
+    height: 14px; background: var(--yellow); z-index: -1; transform: skewX(-3deg);
+  }
+  .hero-body {
+    font-size: 1.05rem; line-height: 1.75; color: #5A574F;
+    max-width: 440px; margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: var(--ink); color: var(--cream);
+    padding: 1rem 2rem; border-radius: 60px;
+    font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.03em; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
+  }
+  .hero-cta:hover { background: var(--ink-light); transform: translateY(-2px); }
+  .hero-cta .arrow {
+    width: 28px; height: 28px; background: var(--yellow); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+  }
+  .hero-cta-secondary {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: transparent; color: var(--ink);
+    padding: 1rem 2rem; border-radius: 60px;
+    font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.03em; text-decoration: none;
+    border: 1.5px solid rgba(26,24,20,0.25);
+    transition: border-color 0.2s, transform 0.2s;
+    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+  }
+  .hero-cta-secondary:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
- /* ── NAV ── */
- nav {
-   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-   display: flex; align-items: center; justify-content: space-between;
-   padding: 1.25rem 3rem;
-   background: rgba(247, 244, 238, 0.92);
-   backdrop-filter: blur(8px);
-   border-bottom: 1px solid rgba(26,24,20,0.08);
- }
- .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
- .nav-links { display: flex; gap: 2.5rem; list-style: none; }
- .nav-links a { text-decoration: none; color: var(--ink-light); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
- .nav-links a:hover { color: var(--ink); }
+  /* ── TICKER ── */
+  .ticker { background: var(--ink); color: var(--cream); padding: 1rem 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-flex; gap: 0; animation: ticker 22s linear infinite; }
+  .ticker-item { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 2.5rem; }
+  .ticker-dot { color: var(--yellow); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+  /* ── WORK SECTION ── */
+  .work { padding: 6rem 3rem; }
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 2rem; border-bottom: 1px solid rgba(26,24,20,0.12); padding-bottom: 1.5rem;
+  }
+  .section-label { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light); }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: -0.02em; }
+  .section-count { font-family: 'Syne', sans-serif; font-size: 0.85rem; color: #888; }
 
- /* ── HERO ── */
- .hero {
-   min-height: 100vh;
-   padding: 7rem 3rem 4rem;
-   display: grid;
-   grid-template-columns: 1fr 1fr;
-   gap: 0;
-   position: relative;
-   overflow: hidden;
-   align-items: center;
- }
- .hero-blobs { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
- .blob { position: absolute; background: var(--yellow); border-radius: 50%; }
- .blob-1 { width: 420px; height: 420px; top: -80px; right: 8%; transform: scaleX(0.7); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
- .blob-2 { width: 340px; height: 340px; bottom: -60px; right: 22%; }
- .blob-3 { width: 180px; height: 180px; top: 15%; left: 42%; }
- .blob-4 { width: 260px; height: 260px; top: 5%; right: 3%; border-radius: 50% 30% 50% 30%; }
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 8px; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .tab {
+    padding: 8px 18px; border-radius: 30px; font-family: 'Syne', sans-serif;
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em;
+    cursor: pointer; border: 1px solid rgba(26,24,20,0.15);
+    background: var(--cream); color: var(--ink-light);
+    transition: all 0.2s; text-transform: none;
+  }
+  .tab:hover { background: rgba(26,24,20,0.06); }
+  .tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .tab-count { font-size: 0.72rem; opacity: 0.55; margin-left: 4px; }
 
+  /* ── PANELS ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
 
- .hero-photo {
-   position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
-   width: 320px; height: 420px; border-radius: 160px;
-   overflow: hidden; z-index: 2; background: #b5c4d8;
-   display: flex; align-items: center; justify-content: center;
- }
- .hero-photo-placeholder { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.7); text-align: center; padding: 1rem; }
+  /* ── CATEGORY BLOCKS ── */
+  .cat-block { margin-bottom: 2.5rem; }
+  .cat-label { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .cat-name { font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #888; white-space: nowrap; }
+  .cat-divider { flex: 1; height: 1px; background: rgba(26,24,20,0.1); }
+  .cat-count { font-family: 'Syne', sans-serif; font-size: 0.68rem; color: #bbb; }
 
+  /* ── UNIFORM GRID ── */
+  .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .cards-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 
- .hero-content { position: relative; z-index: 3; max-width: 580px; }
- .hero-eyebrow {
-   font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700;
-   letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light);
-   margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
- }
- .hero-title {
-   font-family: 'DM Serif Display', serif;
-   font-size: clamp(2.8rem, 5.5vw, 4.5rem);
-   line-height: 1.05; letter-spacing: -0.02em; color: var(--ink);
-   margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
- }
- .hero-title em { font-style: italic; color: var(--ink-light); }
- .hero-title .accent-word { position: relative; display: inline-block; }
- .hero-title .accent-word::after {
-   content: ''; position: absolute; left: 0; right: 0; bottom: 2px;
-   height: 14px; background: var(--yellow); z-index: -1; transform: skewX(-3deg);
- }
- .hero-body {
-   font-size: 1.05rem; line-height: 1.75; color: #5A574F;
-   max-width: 440px; margin-bottom: 2.5rem;
-   opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
- }
- .hero-cta {
-   display: inline-flex; align-items: center; gap: 0.75rem;
-   background: var(--ink); color: var(--cream);
-   padding: 1rem 2rem; border-radius: 60px;
-   font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700;
-   letter-spacing: 0.03em; text-decoration: none;
-   transition: background 0.2s, transform 0.2s;
-   opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
- }
- .hero-cta:hover { background: var(--ink-light); transform: translateY(-2px); }
- .hero-cta .arrow {
-   width: 28px; height: 28px; background: var(--yellow); border-radius: 50%;
-   display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
- }
- @keyframes fadeUp {
-   from { opacity: 0; transform: translateY(24px); }
-   to { opacity: 1; transform: translateY(0); }
- }
+  /* ── PROJECT CARDS ── */
+  .project-card {
+    border-radius: 16px; overflow: hidden; cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+    background: white; border: 1px solid rgba(26,24,20,0.12);
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(26,24,20,0.12); border-color: rgba(26,24,20,0.2); }
 
+  .card-visual {
+    height: 110px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-meta { padding: 11px 14px 14px; background: white; }
+  .card-name { font-family: 'DM Serif Display', serif; font-size: 1.05rem; letter-spacing: -0.01em; margin-bottom: 0; line-height: 1.35; }
+  .card-metrics { font-size: 0.75rem; color: #A8A29A; margin-top: 5px; line-height: 1.5; }
 
- /* ── TICKER ── */
- .ticker { background: var(--ink); color: var(--cream); padding: 1rem 0; overflow: hidden; white-space: nowrap; }
- .ticker-inner { display: inline-flex; gap: 0; animation: ticker 22s linear infinite; }
- .ticker-item { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 2.5rem; }
- .ticker-dot { color: var(--yellow); }
- @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* ── VIDEO CARDS ── */
+  .card-video .card-visual { background: #1C2B3A; }
+  .video-play-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(232,216,75,0.9);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s, background 0.2s;
+    position: relative; z-index: 2; flex-shrink: 0;
+  }
+  .project-card:hover .video-play-btn { transform: scale(1.1); background: var(--yellow); }
+  .video-glow {
+    position: absolute; width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(100,140,180,0.16) 0%, transparent 70%);
+    border-radius: 50%;
+  }
 
+  /* ── NEWSLETTER CARDS ── */
+  .card-newsletter .card-visual { background: #085041; }
+  .newsletter-scene {
+    width: 100%; height: 100%; padding: 12px 14px 10px;
+    display: flex; flex-direction: column; gap: 7px;
+    position: relative; overflow: hidden;
+  }
+  .newsletter-glow {
+    position: absolute; width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(30,200,160,0.18) 0%, transparent 70%);
+    top: -50px; right: -40px; pointer-events: none;
+  }
+  .newsletter-circles {
+    position: absolute; bottom: -20px; left: -20px; pointer-events: none;
+  }
+  .newsletter-subject { font-family: 'DM Serif Display', serif; font-size: 0.92rem; color: rgba(255,255,255,0.92); line-height: 1.3; flex: 1; position: relative; z-index: 1; }
+  .newsletter-lines { display: flex; flex-direction: column; gap: 4px; position: relative; z-index: 1; }
+  .nl-line { height: 4px; background: rgba(255,255,255,0.18); border-radius: 2px; }
 
- /* ── WORK SECTION ── */
- .work { padding: 6rem 3rem; }
- .section-header {
-   display: flex; align-items: baseline; justify-content: space-between;
-   margin-bottom: 2rem; border-bottom: 1px solid rgba(26,24,20,0.12); padding-bottom: 1.5rem;
- }
- .section-label { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light); }
- .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: -0.02em; }
- .section-count { font-family: 'Syne', sans-serif; font-size: 0.85rem; color: #888; }
+  /* ── LINKEDIN CARDS ── */
+  .card-linkedin .card-visual { background: #0A66C2; }
+  .linkedin-scene {
+    width: 100%; height: 100%; padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 8px;
+    position: relative; overflow: hidden;
+  }
+  .linkedin-watermark {
+    position: absolute; bottom: -8px; right: 4px;
+    font-family: 'Syne', sans-serif; font-size: 72px; font-weight: 800;
+    color: rgba(255,255,255,0.05); line-height: 1; user-select: none;
+  }
+  .linkedin-profile { display: flex; align-items: center; gap: 7px; }
+  .linkedin-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.25); flex-shrink: 0; }
+  .linkedin-name-line { height: 5px; background: rgba(255,255,255,0.45); border-radius: 3px; width: 80px; margin-bottom: 4px; }
+  .linkedin-role-line { height: 4px; background: rgba(255,255,255,0.2); border-radius: 3px; width: 50px; }
+  .linkedin-text-lines { display: flex; flex-direction: column; gap: 5px; }
+  .li-line { height: 5px; background: rgba(255,255,255,0.22); border-radius: 3px; }
 
+  /* ── LUMA / EVENT CARDS ── */
+  .card-luma .card-visual { background: #2D1B69; }
+  .luma-scene {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .luma-glow {
+    position: absolute; width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(160,120,255,0.22) 0%, transparent 70%);
+  }
 
- /* ── TABS ── */
- .tabs { display: flex; gap: 8px; margin-bottom: 2.5rem; flex-wrap: wrap; }
- .tab {
-   padding: 8px 18px; border-radius: 30px; font-family: 'Syne', sans-serif;
-   font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em;
-   cursor: pointer; border: 1px solid rgba(26,24,20,0.15);
-   background: var(--cream); color: var(--ink-light);
-   transition: all 0.2s; text-transform: none;
- }
- .tab:hover { background: rgba(26,24,20,0.06); }
- .tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
- .tab-count { font-size: 0.72rem; opacity: 0.55; margin-left: 4px; }
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(10,8,6,0.82); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--cream); width: min(860px, 95vw); max-height: 92vh;
+    border-radius: 24px; overflow-y: auto; position: relative;
+    animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.92) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: sticky; top: 1.5rem; float: right; margin: 1.5rem 1.5rem 0 0;
+    width: 40px; height: 40px; border-radius: 50%; border: none;
+    background: var(--ink); color: var(--cream); font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; z-index: 10;
+  }
+  .modal-close:hover { background: #333; }
+  .modal-video-wrap { padding: 1.5rem 2rem 0; clear: both; }
+  #modal-video { width: 100%; border-radius: 12px; background: black; display: block; max-height: 60vh; }
+  .modal-video-info { padding: 1.5rem 2rem 2rem; }
+  .modal-video-label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 0.5rem; }
+  .modal-video-title { font-family: 'DM Serif Display', serif; font-size: 1.75rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+  .modal-video-desc { font-size: 0.95rem; line-height: 1.75; color: #5A574F; }
 
+  /* ── ABOUT ── */
+  .about {
+    padding: 5rem 3rem; background: var(--ink); color: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-label { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1.25rem; }
+  .about-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .about-title em { color: var(--yellow); }
+  .about-body { font-size: 0.95rem; line-height: 1.8; color: rgba(247,244,238,0.65); margin-bottom: 2rem; }
+  .about-stats { display: flex; gap: 2.5rem; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: var(--yellow); letter-spacing: -0.03em; }
+  .stat-label { font-size: 0.8rem; color: rgba(247,244,238,0.5); margin-top: 2px; }
+  .skills-list { display: flex; flex-direction: column; gap: 1rem; }
+  .skill-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
+  .skill-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .skill-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .skill-desc { font-size: 0.8rem; color: rgba(247,244,238,0.5); margin-top: 1px; }
+  .skill-bar-wrap { margin-left: auto; width: 80px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .skill-bar { height: 100%; background: var(--yellow); border-radius: 2px; }
 
- /* ── PANELS ── */
- .panel { display: none; }
- .panel.active { display: block; }
+  /* ── FOOTER ── */
+  footer { padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(26,24,20,0.1); background: var(--cream); }
+  .footer-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; }
+  .footer-copy { font-size: 0.8rem; color: #9A978F; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.85rem; color: #7A776F; text-decoration: none; }
+  .footer-links a:hover { color: var(--ink); }
 
-
- /* ── CATEGORY BLOCKS ── */
- .cat-block { margin-bottom: 2.5rem; }
- .cat-label { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
- .cat-name { font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #888; white-space: nowrap; }
- .cat-divider { flex: 1; height: 1px; background: rgba(26,24,20,0.1); }
- .cat-count { font-family: 'Syne', sans-serif; font-size: 0.68rem; color: #bbb; }
-
-
- /* ── UNIFORM GRID ── */
- .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
- .cards-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-
-
- /* ── PROJECT CARDS ── */
- .project-card {
-   border-radius: 16px; overflow: hidden; cursor: pointer;
-   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
-   background: white;
- }
- .project-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(26,24,20,0.1); }
-
-
- .card-visual {
-   height: 110px; position: relative; overflow: hidden;
-   display: flex; align-items: center; justify-content: center;
- }
- .card-meta { padding: 11px 14px 14px; background: white; }
- .card-name { font-family: 'DM Serif Display', serif; font-size: 1.05rem; letter-spacing: -0.01em; margin-bottom: 0; line-height: 1.35; }
- .card-metrics { font-size: 0.75rem; color: #A8A29A; margin-top: 5px; line-height: 1.5; }
-
-
- /* ── VIDEO CARDS ── */
- .card-video .card-visual { background: #0D0D0D; }
- .video-play-btn {
-   width: 52px; height: 52px; border-radius: 50%;
-   background: rgba(232,216,75,0.9);
-   display: flex; align-items: center; justify-content: center;
-   transition: transform 0.2s, background 0.2s;
-   position: relative; z-index: 2; flex-shrink: 0;
- }
- .project-card:hover .video-play-btn { transform: scale(1.1); background: var(--yellow); }
- .video-glow {
-   position: absolute; width: 180px; height: 180px;
-   background: radial-gradient(circle, rgba(232,216,75,0.08) 0%, transparent 70%);
-   border-radius: 50%;
- }
-
-
- /* ── NEWSLETTER CARDS ── */
- .card-newsletter .card-visual { background: #F7F3EC; }
- .newsletter-scene {
-   width: 100%; height: 100%; padding: 12px 14px 10px;
-   display: flex; flex-direction: column; gap: 7px;
-   position: relative;
- }
- .newsletter-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--yellow); }
- .nl-header { display: flex; align-items: center; justify-content: space-between; }
- .nl-dots { display: flex; gap: 4px; }
- .nl-dot { width: 6px; height: 6px; border-radius: 50%; background: #D0CAC0; }
- .nl-to-line { height: 4px; background: #E0DBD0; border-radius: 2px; width: 52%; }
- .newsletter-subject { font-family: 'DM Serif Display', serif; font-size: 0.92rem; color: #1a1814; line-height: 1.3; flex: 1; }
- .newsletter-lines { display: flex; flex-direction: column; gap: 4px; }
- .nl-line { height: 4px; background: #E8E2D8; border-radius: 2px; }
-
-
- /* ── LINKEDIN CARDS ── */
- .card-linkedin .card-visual { background: #0A66C2; }
- .linkedin-scene {
-   width: 100%; height: 100%; padding: 12px 14px;
-   display: flex; flex-direction: column; gap: 8px;
-   position: relative; overflow: hidden;
- }
- .linkedin-watermark {
-   position: absolute; bottom: -8px; right: 4px;
-   font-family: 'Syne', sans-serif; font-size: 72px; font-weight: 800;
-   color: rgba(255,255,255,0.05); line-height: 1; user-select: none;
- }
- .linkedin-profile { display: flex; align-items: center; gap: 7px; }
- .linkedin-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.25); flex-shrink: 0; }
- .linkedin-name-line { height: 5px; background: rgba(255,255,255,0.45); border-radius: 3px; width: 80px; margin-bottom: 4px; }
- .linkedin-role-line { height: 4px; background: rgba(255,255,255,0.2); border-radius: 3px; width: 50px; }
- .linkedin-text-lines { display: flex; flex-direction: column; gap: 5px; }
- .li-line { height: 5px; background: rgba(255,255,255,0.22); border-radius: 3px; }
-
-
- /* ── LUMA / EVENT CARDS ── */
- .card-luma .card-visual { background: #2D1B69; }
- .luma-scene {
-   width: 100%; height: 100%;
-   display: flex; align-items: center; justify-content: center;
-   position: relative; overflow: hidden;
- }
- .luma-glow {
-   position: absolute; width: 200px; height: 200px; border-radius: 50%;
-   background: radial-gradient(circle, rgba(160,120,255,0.22) 0%, transparent 70%);
- }
-
-
- /* ── MODAL ── */
- .modal-overlay {
-   display: none; position: fixed; inset: 0; z-index: 200;
-   background: rgba(10,8,6,0.82); backdrop-filter: blur(4px);
-   align-items: center; justify-content: center;
- }
- .modal-overlay.open { display: flex; }
- .modal {
-   background: var(--cream); width: min(860px, 95vw); max-height: 92vh;
-   border-radius: 24px; overflow-y: auto; position: relative;
-   animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
- }
- @keyframes modalIn {
-   from { opacity: 0; transform: scale(0.92) translateY(20px); }
-   to { opacity: 1; transform: scale(1) translateY(0); }
- }
- .modal-close {
-   position: sticky; top: 1.5rem; float: right; margin: 1.5rem 1.5rem 0 0;
-   width: 40px; height: 40px; border-radius: 50%; border: none;
-   background: var(--ink); color: var(--cream); font-size: 1.1rem; cursor: pointer;
-   display: flex; align-items: center; justify-content: center;
-   transition: background 0.2s; z-index: 10;
- }
- .modal-close:hover { background: #333; }
- .modal-video-wrap { padding: 1.5rem 2rem 0; clear: both; }
- #modal-video { width: 100%; border-radius: 12px; background: black; display: block; max-height: 60vh; }
- .modal-video-info { padding: 1.5rem 2rem 2rem; }
- .modal-video-label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 0.5rem; }
- .modal-video-title { font-family: 'DM Serif Display', serif; font-size: 1.75rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
- .modal-video-desc { font-size: 0.95rem; line-height: 1.75; color: #5A574F; }
-
-
- /* ── ABOUT ── */
- .about {
-   padding: 5rem 3rem; background: var(--ink); color: var(--cream);
-   display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
- }
- .about-label { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1.25rem; }
- .about-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
- .about-title em { color: var(--yellow); }
- .about-body { font-size: 0.95rem; line-height: 1.8; color: rgba(247,244,238,0.65); margin-bottom: 2rem; }
- .about-stats { display: flex; gap: 2.5rem; }
- .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: var(--yellow); letter-spacing: -0.03em; }
- .stat-label { font-size: 0.8rem; color: rgba(247,244,238,0.5); margin-top: 2px; }
- .skills-list { display: flex; flex-direction: column; gap: 1rem; }
- .skill-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
- .skill-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
- .skill-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
- .skill-desc { font-size: 0.8rem; color: rgba(247,244,238,0.5); margin-top: 1px; }
- .skill-bar-wrap { margin-left: auto; width: 80px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
- .skill-bar { height: 100%; background: var(--yellow); border-radius: 2px; }
-
-
- /* ── FOOTER ── */
- footer { padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(26,24,20,0.1); background: var(--cream); }
- .footer-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; }
- .footer-copy { font-size: 0.8rem; color: #9A978F; }
- .footer-links { display: flex; gap: 1.5rem; }
- .footer-links a { font-size: 0.85rem; color: #7A776F; text-decoration: none; }
- .footer-links a:hover { color: var(--ink); }
-
-
- @media (max-width: 900px) {
-   .hero { grid-template-columns: 1fr; }
-   .hero-photo { display: none; }
-   .cards-grid { grid-template-columns: repeat(2, 1fr); }
-   .cards-grid-3 { grid-template-columns: repeat(2, 1fr); }
-   .about { grid-template-columns: 1fr; }
-   nav { padding: 1rem 1.5rem; }
-   .work, .about { padding: 4rem 1.5rem; }
-   .hero { padding: 6rem 1.5rem 3rem; }
- }
- @media (max-width: 600px) {
-   .cards-grid { grid-template-columns: 1fr; }
-   .cards-grid-3 { grid-template-columns: 1fr; }
- }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-photo { display: none; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .cards-grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .about { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .work, .about { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+  }
+  @media (max-width: 600px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .cards-grid-3 { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 
-
 <!-- NAV -->
 <nav>
- <span class="nav-logo">Lila Roginski.</span>
- <ul class="nav-links">
-   <li><a href="#work">Work</a></li>
-   <li><a href="#about">About</a></li>
-   <!-- PLACEHOLDER: review this — update with Lila's real email -->
-   <li><a href="mailto:lila@example.com">Contact</a></li>
- </ul>
+  <span class="nav-logo">Lila Roginski.</span>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="Lila_Roginski.pdf" target="_blank">Resume</a></li>
+    <li><a href="mailto:lilaclaireroginski@gmail.com">Contact</a></li>
+  </ul>
 </nav>
-
 
 <!-- HERO -->
 <section class="hero">
- <div class="hero-blobs" aria-hidden="true">
-   <div class="blob blob-1"></div>
-   <div class="blob blob-2"></div>
-   <div class="blob blob-3"></div>
-   <div class="blob blob-4"></div>
- </div>
- <div class="hero-photo" aria-hidden="true">
-   <div class="hero-photo-placeholder">Your photo here</div>
- </div>
- <div class="hero-content">
-   <!-- PLACEHOLDER: review this — update title/role -->
-   <p class="hero-eyebrow">Business Development Manager &amp; Content Creator</p>
-   <h1 class="hero-title">
-     <!-- PLACEHOLDER: review this — update hero headline -->
-     Building <em>community</em><br>
-     around what<br>
-     <span class="accent-word">matters most</span>
-   </h1>
-   <!-- PLACEHOLDER: review this — update hero body copy -->
-   <p class="hero-body">
-     I'm Lila Roginski — a business development manager and content creator in the sustainability space. I grow audiences, produce video, and turn ideas into events people actually show up for.
-   </p>
-   <a href="#work" class="hero-cta">
-     View my work
-     <span class="arrow">↓</span>
-   </a>
- </div>
-</section>
+  <div class="hero-blobs" aria-hidden="true">
+    <div class="blob blob-tl"></div>
+    <div class="blob blob-bl"></div>
+    <div class="blob blob-tr"></div>
+  </div>
 
+  <div class="hero-photo" aria-hidden="true">
+    <img src="Lila_Roginski_photo.jpeg" alt="Lila Roginski">
+  </div>
+
+  <div class="hero-content">
+    <!-- PLACEHOLDER: review this — update title/role -->
+    <p class="hero-eyebrow">Business Development Manager &amp; Content Creator</p>
+    <h1 class="hero-title">
+      <!-- PLACEHOLDER: review this — update hero headline -->
+      Building <em>community</em><br>
+      around what<br>
+      <span class="accent-word">matters most</span>
+    </h1>
+    <!-- PLACEHOLDER: review this — update hero body copy -->
+    <p class="hero-body">
+      I'm Lila Roginski — a business development manager and content creator in the sustainability space. I grow audiences, produce video, and turn ideas into events people actually show up for.
+    </p>
+    <a href="#work" class="hero-cta">
+      View my work
+      <span class="arrow">↓</span>
+    </a>
+  </div>
+</section>
 
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
- <div class="ticker-inner">
-   <span class="ticker-item">Newsletter Strategy <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">LinkedIn Growth <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Video Production <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Event Management <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Community Building <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Content Strategy <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Newsletter Strategy <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">LinkedIn Growth <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Video Production <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Event Management <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Community Building <span class="ticker-dot">✦</span></span>
-   <span class="ticker-item">Content Strategy <span class="ticker-dot">✦</span></span>
- </div>
+  <div class="ticker-inner">
+    <span class="ticker-item">Newsletter Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">LinkedIn Growth <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Video Production <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Event Management <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Community Building <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Content Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Newsletter Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">LinkedIn Growth <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Video Production <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Event Management <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Community Building <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Content Strategy <span class="ticker-dot">✦</span></span>
+  </div>
 </div>
-
 
 <!-- WORK -->
 <section class="work" id="work">
- <div class="section-header">
-   <div>
-     <p class="section-label">Selected work</p>
-     <h2 class="section-title">Recent projects</h2>
-   </div>
-   <span class="section-count">15 pieces</span>
- </div>
+  <div class="section-header">
+    <div>
+      <p class="section-label">Selected work</p>
+      <h2 class="section-title">Recent projects</h2>
+    </div>
+    <span class="section-count">15 pieces</span>
+  </div>
 
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('all', this)">All work <span class="tab-count">15</span></button>
+    <button class="tab" onclick="switchTab('linkedin', this)">LinkedIn <span class="tab-count">4</span></button>
+    <button class="tab" onclick="switchTab('events', this)">Events <span class="tab-count">4</span></button>
+    <button class="tab" onclick="switchTab('newsletters', this)">Newsletters <span class="tab-count">3</span></button>
+    <button class="tab" onclick="switchTab('videos', this)">Videos <span class="tab-count">4</span></button>
+  </div>
 
- <!-- TABS -->
- <div class="tabs">
-   <button class="tab active" onclick="switchTab('all', this)">All work <span class="tab-count">15</span></button>
-   <button class="tab" onclick="switchTab('linkedin', this)">LinkedIn <span class="tab-count">4</span></button>
-   <button class="tab" onclick="switchTab('events', this)">Events <span class="tab-count">4</span></button>
-   <button class="tab" onclick="switchTab('newsletters', this)">Newsletters <span class="tab-count">3</span></button>
-   <button class="tab" onclick="switchTab('videos', this)">Videos <span class="tab-count">4</span></button>
- </div>
+  <!-- ══ ALL WORK PANEL ══ -->
+  <div id="panel-all" class="panel active">
 
+    <!-- LinkedIn -->
+    <div class="cat-block">
+      <div class="cat-label">
+        <span class="cat-name">LinkedIn</span>
+        <span class="cat-divider"></span>
+        <span class="cat-count">4</span>
+      </div>
+      <div class="cards-grid">
+        <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7307836031729311745/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn blog-style post">
+          <div class="card-visual">
+            <div class="linkedin-scene">
+              <div class="linkedin-watermark">in</div>
+              <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
+              <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:80%"></div></div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">Blog-style post</p>
+            <p class="card-metrics">135 Reactions &nbsp;·&nbsp; 30 Comments</p>
+          </div>
+        </div>
+        <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_the-sustainability-creatives-are-excited-activity-7348002884866756608-BbNs','_blank')" role="button" tabindex="0" aria-label="View LinkedIn partnered event promotion">
+          <div class="card-visual">
+            <div class="linkedin-scene">
+              <div class="linkedin-watermark">in</div>
+              <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
+              <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:75%"></div><div class="li-line" style="width:88%"></div></div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">Partnered event promotion</p>
+            <p class="card-metrics">23 Reactions &nbsp;·&nbsp; 1,097 Impressions</p>
+          </div>
+        </div>
+        <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_laclimateweek-sfclimateweek-activity-7319152269101318144-MatF/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn SF Climate Week post">
+          <div class="card-visual">
+            <div class="linkedin-scene">
+              <div class="linkedin-watermark">in</div>
+              <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
+              <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:60%"></div></div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">SF Climate Week promo</p>
+            <p class="card-metrics">23 Reactions &nbsp;·&nbsp; 881 Impressions &nbsp;·&nbsp; 4 Comments</p>
+          </div>
+        </div>
+        <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_welcome-to-the-hub-activity-7313991250997563392-kFnb/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn thought piece">
+          <div class="card-visual">
+            <div class="linkedin-scene">
+              <div class="linkedin-watermark">in</div>
+              <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
+              <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:78%"></div><div class="li-line" style="width:70%"></div></div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">Thought piece</p>
+            <p class="card-metrics">28 Reactions &nbsp;·&nbsp; 1,086 Impressions &nbsp;·&nbsp; 6 Comments</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
- <!-- ══ ALL WORK PANEL ══ -->
- <div id="panel-all" class="panel active">
+    <!-- Events -->
+    <div class="cat-block">
+      <div class="cat-label">
+        <span class="cat-name">Events</span>
+        <span class="cat-divider"></span>
+        <span class="cat-count">4</span>
+      </div>
+      <div class="cards-grid">
+        <div class="project-card card-luma" onclick="window.open('https://luma.com/sustainabilitycreatives?k=c','_blank')" role="button" tabindex="0" aria-label="View Sustainability Creatives event calendar">
+          <div class="card-visual">
+            <div class="luma-scene">
+              <div class="luma-glow"></div>
+              <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+                <rect x="4" y="10" width="44" height="38" rx="6" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+                <rect x="14" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/>
+                <rect x="34" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/>
+                <rect x="4" y="22" width="44" height="1.2" fill="rgba(255,255,255,0.1)"/>
+                <circle cx="15" cy="32" r="3" fill="rgba(160,120,255,0.7)"/>
+                <circle cx="26" cy="32" r="3" fill="rgba(160,120,255,0.5)"/>
+                <circle cx="37" cy="32" r="3" fill="rgba(160,120,255,0.3)"/>
+                <circle cx="15" cy="43" r="3" fill="rgba(160,120,255,0.3)"/>
+                <circle cx="26" cy="43" r="3" fill="#E8D84B" opacity="0.85"/>
+                <circle cx="37" cy="43" r="3" fill="rgba(160,120,255,0.2)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">SC Event Calendar</p>
+            <p class="card-metrics">1,433 Subscribers &nbsp;·&nbsp; 183 Events &nbsp;·&nbsp; 22 ★ Reviews</p>
+          </div>
+        </div>
+        <div class="project-card card-luma" onclick="window.open('https://luma.com/5b2mf1oe','_blank')" role="button" tabindex="0" aria-label="View Climate Confessional event">
+          <div class="card-visual">
+            <div class="luma-scene">
+              <div class="luma-glow"></div>
+              <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+                <circle cx="26" cy="20" r="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                <circle cx="26" cy="18" r="6" fill="rgba(255,255,255,0.18)"/>
+                <path d="M10 44 Q10 34 26 34 Q42 34 42 44" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+                <circle cx="40" cy="11" r="4" fill="#E8D84B" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">Climate Confessional: Charlie Sellars</p>
+            <p class="card-metrics">126 Guests</p>
+          </div>
+        </div>
+        <div class="project-card card-luma" onclick="window.open('https://luma.com/qwzglyde','_blank')" role="button" tabindex="0" aria-label="View Portfolio Tips event">
+          <div class="card-visual">
+            <div class="luma-scene">
+              <div class="luma-glow"></div>
+              <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+                <rect x="10" y="6" width="32" height="40" rx="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+                <rect x="16" y="16" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.4)"/>
+                <rect x="16" y="23" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/>
+                <rect x="16" y="29" width="18" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/>
+                <rect x="16" y="37" width="20" height="6" rx="3" fill="#E8D84B" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">Portfolio Tips: Job Switcher Edition</p>
+            <p class="card-metrics">62 Guests</p>
+          </div>
+        </div>
+        <div class="project-card card-luma" onclick="window.open('https://luma.com/466bqkng','_blank')" role="button" tabindex="0" aria-label="View Re-design Jam event">
+          <div class="card-visual">
+            <div class="luma-scene">
+              <div class="luma-glow"></div>
+              <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+                <circle cx="26" cy="22" r="14" fill="rgba(232,216,75,0.1)" stroke="rgba(232,216,75,0.35)" stroke-width="1.2"/>
+                <circle cx="26" cy="20" r="7" fill="rgba(232,216,75,0.22)"/>
+                <line x1="20" y1="36" x2="20" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="32" y1="36" x2="32" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="17" y1="43" x2="35" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="11" cy="12" r="2.5" fill="#E8D84B" opacity="0.65"/>
+                <circle cx="41" cy="9" r="2" fill="#E8D84B" opacity="0.45"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-name">Re-design Jam: Bright Ideas</p>
+            <p class="card-metrics">67 Guests</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Newsletters -->
+    <div class="cat-block">
+      <div class="cat-label">
+        <span class="cat-name">Newsletters</span>
+        <span class="cat-divider"></span>
+        <span class="cat-count">3</span>
+      </div>
+      <div class="cards-grid-3">
+        <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=8015b190-29ee-11f0-8449-f5c623a97377&pt=campaign&t=1746485666&s=b90299e014521ed6ace4fecc6e3682e4e0922bcffce8f35af4630f79c4cbb72b','_blank')" role="button" tabindex="0" aria-label="View newsletter: Climate Week">
+          <div class="card-visual">
+            <div class="newsletter-scene">
+              <div class="newsletter-glow"></div>
+              <svg class="newsletter-circles" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="80" r="50" fill="rgba(255,255,255,0.04)"/><circle cx="20" cy="80" r="30" fill="rgba(255,255,255,0.04)"/></svg>
+              <p class="newsletter-subject">Warming: Sweet Climate Week Pics Included!</p>
+              <div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:78%"></div><div class="nl-line" style="width:55%"></div></div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-metrics">998 Sent &nbsp;·&nbsp; 65.1% Opened &nbsp;·&nbsp; 2.51% Clicked</p>
+          </div>
+        </div>
+        <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=7e2423ba-8a9e-11f0-863a-71a7ef473c68&pt=campaign&t=1757117901&s=20a09dbd515fa8695192755865ccf4212bbb8c5b489610ddd3ac40b5e5301d44','_blank')" role="button" tabindex="0" aria-label="View newsletter: Portfolio Mistakes">
+          <div class="card-visual">
+            <div class="newsletter-scene">
+              <div class="newsletter-glow"></div>
+              <svg class="newsletter-circles" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="80" r="50" fill="rgba(255,255,255,0.04)"/><circle cx="20" cy="80" r="30" fill="rgba(255,255,255,0.04)"/></svg>
+              <p class="newsletter-subject">Why Hiring Managers Skip Your Portfolio: 2 Common Mistakes</p>
+              <div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:82%"></div><div class="nl-line" style="width:60%"></div></div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-metrics">1,165 Sent &nbsp;·&nbsp; 49.7% Opened &nbsp;·&nbsp; 1.37% Clicked</p>
+          </div>
+        </div>
+        <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=40620446-fa36-11ef-81d2-fb9a6fac7f9d&pt=campaign&t=1741387515&s=4ee06cd5db2a78f4935fe16cd6a64297e9323a842d88ef7a36646e9973a75512','_blank')" role="button" tabindex="0" aria-label="View newsletter: Leadership Training">
+          <div class="card-visual">
+            <div class="newsletter-scene">
+              <div class="newsletter-glow"></div>
+              <svg class="newsletter-circles" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="80" r="50" fill="rgba(255,255,255,0.04)"/><circle cx="20" cy="80" r="30" fill="rgba(255,255,255,0.04)"/></svg>
+              <p class="newsletter-subject">FREE LEADERSHIP TRAINING</p>
+              <div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:70%"></div><div class="nl-line" style="width:50%"></div></div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-metrics">674 Sent &nbsp;·&nbsp; 64.1% Opened &nbsp;·&nbsp; 5.93% Clicked</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-   <!-- LinkedIn -->
-   <div class="cat-block">
-     <div class="cat-label">
-       <span class="cat-name">LinkedIn</span>
-       <span class="cat-divider"></span>
-       <span class="cat-count">4</span>
-     </div>
-     <div class="cards-grid">
-       <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7307836031729311745/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn blog-style post">
-         <div class="card-visual">
-           <div class="linkedin-scene">
-             <div class="linkedin-watermark">in</div>
-             <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
-             <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:80%"></div></div>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">Blog-style post</p>
-           <p class="card-metrics">135 Reactions &nbsp;·&nbsp; 30 Comments</p>
-         </div>
-       </div>
-       <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_the-sustainability-creatives-are-excited-activity-7348002884866756608-BbNs','_blank')" role="button" tabindex="0" aria-label="View LinkedIn partnered event promotion">
-         <div class="card-visual">
-           <div class="linkedin-scene">
-             <div class="linkedin-watermark">in</div>
-             <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
-             <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:75%"></div><div class="li-line" style="width:88%"></div></div>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">Partnered event promotion</p>
-           <p class="card-metrics">23 Reactions &nbsp;·&nbsp; 1,097 Impressions</p>
-         </div>
-       </div>
-       <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_laclimateweek-sfclimateweek-activity-7319152269101318144-MatF/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn SF Climate Week post">
-         <div class="card-visual">
-           <div class="linkedin-scene">
-             <div class="linkedin-watermark">in</div>
-             <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
-             <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:60%"></div></div>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">SF Climate Week promo</p>
-           <p class="card-metrics">23 Reactions &nbsp;·&nbsp; 881 Impressions &nbsp;·&nbsp; 4 Comments</p>
-         </div>
-       </div>
-       <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_welcome-to-the-hub-activity-7313991250997563392-kFnb/','_blank')" role="button" tabindex="0" aria-label="View LinkedIn thought piece">
-         <div class="card-visual">
-           <div class="linkedin-scene">
-             <div class="linkedin-watermark">in</div>
-             <div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div>
-             <div class="linkedin-text-lines"><div class="li-line" style="width:100%"></div><div class="li-line" style="width:78%"></div><div class="li-line" style="width:70%"></div></div>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">Thought piece</p>
-           <p class="card-metrics">28 Reactions &nbsp;·&nbsp; 1,086 Impressions &nbsp;·&nbsp; 6 Comments</p>
-         </div>
-       </div>
-     </div>
-   </div>
+    <!-- Videos -->
+    <div class="cat-block">
+      <div class="cat-label">
+        <span class="cat-name">Videos</span>
+        <span class="cat-divider"></span>
+        <span class="cat-count">4</span>
+      </div>
+      <div class="cards-grid">
+        <div class="project-card card-video" onclick="openVideo('Sustainability Creatives Introductory Video.mp4','Sustainability Creatives: Who We Are','An introductory video for the Sustainability Creatives community — covering who we are, what we do, and why it matters.')" role="button" tabindex="0" aria-label="Play Sustainability Creatives intro video">
+          <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+          <div class="card-meta">
+            <!-- PLACEHOLDER: review this — update title and description -->
+            <p class="card-name">Sustainability Creatives: Who We Are</p>
+            <p class="card-metrics">Brand &nbsp;·&nbsp; Intro</p>
+          </div>
+        </div>
+        <div class="project-card card-video" onclick="openVideo('InterviewProgramTrailer.mp4','Interview Program: Official Trailer','A short trailer spotlighting the Sustainability Creatives Interview Program — designed to help members land sustainability roles.')" role="button" tabindex="0" aria-label="Play Interview Program trailer">
+          <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+          <div class="card-meta">
+            <!-- PLACEHOLDER: review this — update title and description -->
+            <p class="card-name">Interview Program Trailer</p>
+            <p class="card-metrics">Trailer &nbsp;·&nbsp; Series</p>
+          </div>
+        </div>
+        <div class="project-card card-video" onclick="openVideo('InterviewProgramDay1.mp4','Interview Program: Day One','Day one of the Interview Program series — covering foundations, first impressions, and how to tell your sustainability story.')" role="button" tabindex="0" aria-label="Play Interview Program Day 1">
+          <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+          <div class="card-meta">
+            <!-- PLACEHOLDER: review this — update title and description -->
+            <p class="card-name">Interview Program: Day 1</p>
+            <p class="card-metrics">Series &nbsp;·&nbsp; Day 1 of 2</p>
+          </div>
+        </div>
+        <div class="project-card card-video" onclick="openVideo('InterviewProgramDay2.mp4','Interview Program: Day Two','Day two dives into technical interview prep, portfolio walkthroughs, and common pitfalls to avoid.')" role="button" tabindex="0" aria-label="Play Interview Program Day 2">
+          <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+          <div class="card-meta">
+            <!-- PLACEHOLDER: review this — update title and description -->
+            <p class="card-name">Interview Program: Day 2</p>
+            <p class="card-metrics">Series &nbsp;·&nbsp; Day 2 of 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
+  </div><!-- end panel-all -->
 
-   <!-- Events -->
-   <div class="cat-block">
-     <div class="cat-label">
-       <span class="cat-name">Events</span>
-       <span class="cat-divider"></span>
-       <span class="cat-count">4</span>
-     </div>
-     <div class="cards-grid">
-       <div class="project-card card-luma" onclick="window.open('https://luma.com/sustainabilitycreatives?k=c','_blank')" role="button" tabindex="0" aria-label="View Sustainability Creatives event calendar">
-         <div class="card-visual">
-           <div class="luma-scene">
-             <div class="luma-glow"></div>
-             <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
-               <rect x="4" y="10" width="44" height="38" rx="6" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
-               <rect x="14" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/>
-               <rect x="34" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/>
-               <rect x="4" y="22" width="44" height="1.2" fill="rgba(255,255,255,0.1)"/>
-               <circle cx="15" cy="32" r="3" fill="rgba(160,120,255,0.7)"/>
-               <circle cx="26" cy="32" r="3" fill="rgba(160,120,255,0.5)"/>
-               <circle cx="37" cy="32" r="3" fill="rgba(160,120,255,0.3)"/>
-               <circle cx="15" cy="43" r="3" fill="rgba(160,120,255,0.3)"/>
-               <circle cx="26" cy="43" r="3" fill="#E8D84B" opacity="0.85"/>
-               <circle cx="37" cy="43" r="3" fill="rgba(160,120,255,0.2)"/>
-             </svg>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">SC Event Calendar</p>
-           <p class="card-metrics">1,433 Subscribers &nbsp;·&nbsp; 183 Events &nbsp;·&nbsp; 22 ★ Reviews</p>
-         </div>
-       </div>
-       <div class="project-card card-luma" onclick="window.open('https://luma.com/5b2mf1oe','_blank')" role="button" tabindex="0" aria-label="View Climate Confessional event">
-         <div class="card-visual">
-           <div class="luma-scene">
-             <div class="luma-glow"></div>
-             <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
-               <circle cx="26" cy="20" r="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
-               <circle cx="26" cy="18" r="6" fill="rgba(255,255,255,0.18)"/>
-               <path d="M10 44 Q10 34 26 34 Q42 34 42 44" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
-               <circle cx="40" cy="11" r="4" fill="#E8D84B" opacity="0.9"/>
-             </svg>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">Climate Confessional: Charlie Sellars</p>
-           <p class="card-metrics">126 Guests</p>
-         </div>
-       </div>
-       <div class="project-card card-luma" onclick="window.open('https://luma.com/qwzglyde','_blank')" role="button" tabindex="0" aria-label="View Portfolio Tips event">
-         <div class="card-visual">
-           <div class="luma-scene">
-             <div class="luma-glow"></div>
-             <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
-               <rect x="10" y="6" width="32" height="40" rx="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
-               <rect x="16" y="16" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.4)"/>
-               <rect x="16" y="23" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/>
-               <rect x="16" y="29" width="18" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/>
-               <rect x="16" y="37" width="20" height="6" rx="3" fill="#E8D84B" opacity="0.9"/>
-             </svg>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">Portfolio Tips: Job Switcher Edition</p>
-           <p class="card-metrics">62 Guests</p>
-         </div>
-       </div>
-       <div class="project-card card-luma" onclick="window.open('https://luma.com/466bqkng','_blank')" role="button" tabindex="0" aria-label="View Re-design Jam event">
-         <div class="card-visual">
-           <div class="luma-scene">
-             <div class="luma-glow"></div>
-             <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
-               <circle cx="26" cy="22" r="14" fill="rgba(232,216,75,0.1)" stroke="rgba(232,216,75,0.35)" stroke-width="1.2"/>
-               <circle cx="26" cy="20" r="7" fill="rgba(232,216,75,0.22)"/>
-               <line x1="20" y1="36" x2="20" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/>
-               <line x1="32" y1="36" x2="32" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/>
-               <line x1="17" y1="43" x2="35" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round"/>
-               <circle cx="11" cy="12" r="2.5" fill="#E8D84B" opacity="0.65"/>
-               <circle cx="41" cy="9" r="2" fill="#E8D84B" opacity="0.45"/>
-             </svg>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-name">Re-design Jam: Bright Ideas</p>
-           <p class="card-metrics">67 Guests</p>
-         </div>
-       </div>
-     </div>
-   </div>
+  <!-- ══ LINKEDIN PANEL ══ -->
+  <div id="panel-linkedin" class="panel">
+    <div class="cards-grid">
+      <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7307836031729311745/','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:80%"></div><div class="li-line" style="width:60%"></div></div></div></div>
+        <div class="card-meta"><p class="card-name">Blog-style post</p><p class="card-metrics">135 Reactions &nbsp;·&nbsp; 30 Comments</p></div>
+      </div>
+      <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_the-sustainability-creatives-are-excited-activity-7348002884866756608-BbNs','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:75%"></div><div class="li-line" style="width:88%"></div><div class="li-line" style="width:55%"></div></div></div></div>
+        <div class="card-meta"><p class="card-name">Partnered event promotion</p><p class="card-metrics">23 Reactions &nbsp;·&nbsp; 1,097 Impressions &nbsp;·&nbsp; 1 Comment</p></div>
+      </div>
+      <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_laclimateweek-sfclimateweek-activity-7319152269101318144-MatF/','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:65%"></div><div class="li-line" style="width:80%"></div></div></div></div>
+        <div class="card-meta"><p class="card-name">SF Climate Week promo</p><p class="card-metrics">23 Reactions &nbsp;·&nbsp; 881 Impressions &nbsp;·&nbsp; 4 Comments</p></div>
+      </div>
+      <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_welcome-to-the-hub-activity-7313991250997563392-kFnb/','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:88%"></div><div class="li-line" style="width:72%"></div><div class="li-line" style="width:55%"></div></div></div></div>
+        <div class="card-meta"><p class="card-name">Thought piece</p><p class="card-metrics">28 Reactions &nbsp;·&nbsp; 1,086 Impressions &nbsp;·&nbsp; 6 Comments</p></div>
+      </div>
+    </div>
+  </div>
 
+  <!-- ══ EVENTS PANEL ══ -->
+  <div id="panel-events" class="panel">
+    <div class="cards-grid">
+      <div class="project-card card-luma" onclick="window.open('https://luma.com/sustainabilitycreatives?k=c','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><rect x="4" y="10" width="44" height="38" rx="6" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/><rect x="14" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/><rect x="34" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/><rect x="4" y="22" width="44" height="1.2" fill="rgba(255,255,255,0.1)"/><circle cx="15" cy="32" r="3" fill="rgba(160,120,255,0.7)"/><circle cx="26" cy="32" r="3" fill="rgba(160,120,255,0.5)"/><circle cx="37" cy="32" r="3" fill="rgba(160,120,255,0.3)"/><circle cx="15" cy="43" r="3" fill="rgba(160,120,255,0.3)"/><circle cx="26" cy="43" r="3" fill="#E8D84B" opacity="0.85"/><circle cx="37" cy="43" r="3" fill="rgba(160,120,255,0.2)"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">SC Event Calendar</p><p class="card-metrics">1,433 Subscribers &nbsp;·&nbsp; 183 Events &nbsp;·&nbsp; 22 ★ Reviews</p></div>
+      </div>
+      <div class="project-card card-luma" onclick="window.open('https://luma.com/5b2mf1oe','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><circle cx="26" cy="20" r="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/><circle cx="26" cy="18" r="6" fill="rgba(255,255,255,0.18)"/><path d="M10 44 Q10 34 26 34 Q42 34 42 44" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/><circle cx="40" cy="11" r="4" fill="#E8D84B" opacity="0.9"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">Climate Confessional: Charlie Sellars</p><p class="card-metrics">126 Guests</p></div>
+      </div>
+      <div class="project-card card-luma" onclick="window.open('https://luma.com/qwzglyde','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><rect x="10" y="6" width="32" height="40" rx="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/><rect x="16" y="16" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.4)"/><rect x="16" y="23" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/><rect x="16" y="29" width="18" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/><rect x="16" y="37" width="20" height="6" rx="3" fill="#E8D84B" opacity="0.9"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">Portfolio Tips: Job Switcher Edition</p><p class="card-metrics">62 Guests</p></div>
+      </div>
+      <div class="project-card card-luma" onclick="window.open('https://luma.com/466bqkng','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><circle cx="26" cy="22" r="14" fill="rgba(232,216,75,0.1)" stroke="rgba(232,216,75,0.35)" stroke-width="1.2"/><circle cx="26" cy="20" r="7" fill="rgba(232,216,75,0.22)"/><line x1="20" y1="36" x2="20" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="36" x2="32" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/><line x1="17" y1="43" x2="35" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="12" r="2.5" fill="#E8D84B" opacity="0.65"/><circle cx="41" cy="9" r="2" fill="#E8D84B" opacity="0.45"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">Re-design Jam: Bright Ideas</p><p class="card-metrics">67 Guests</p></div>
+      </div>
+    </div>
+  </div>
 
-   <!-- Newsletters -->
-   <div class="cat-block">
-     <div class="cat-label">
-       <span class="cat-name">Newsletters</span>
-       <span class="cat-divider"></span>
-       <span class="cat-count">3</span>
-     </div>
-     <div class="cards-grid-3">
-       <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=8015b190-29ee-11f0-8449-f5c623a97377&pt=campaign&t=1746485666&s=b90299e014521ed6ace4fecc6e3682e4e0922bcffce8f35af4630f79c4cbb72b','_blank')" role="button" tabindex="0" aria-label="View newsletter: Climate Week">
-         <div class="card-visual">
-           <div class="newsletter-scene">
-             <div class="newsletter-top-bar"></div>
-             <div class="nl-header"><div class="nl-dots"><div class="nl-dot"></div><div class="nl-dot"></div><div class="nl-dot"></div></div><div class="nl-to-line"></div></div>
-             <p class="newsletter-subject">Warming: Sweet Climate Week Pics Included!</p>
-             <div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:78%"></div><div class="nl-line" style="width:55%"></div></div>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-metrics">998 Sent &nbsp;·&nbsp; 65.1% Opened &nbsp;·&nbsp; 2.51% Clicked</p>
-         </div>
-       </div>
-       <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=7e2423ba-8a9e-11f0-863a-71a7ef473c68&pt=campaign&t=1757117901&s=20a09dbd515fa8695192755865ccf4212bbb8c5b489610ddd3ac40b5e5301d44','_blank')" role="button" tabindex="0" aria-label="View newsletter: Portfolio Mistakes">
-         <div class="card-visual">
-           <div class="newsletter-scene">
-             <div class="newsletter-top-bar"></div>
-             <div class="nl-header"><div class="nl-dots"><div class="nl-dot"></div><div class="nl-dot"></div><div class="nl-dot"></div></div><div class="nl-to-line"></div></div>
-             <p class="newsletter-subject">Why Hiring Managers Skip Your Portfolio: 2 Common Mistakes</p>
-             <div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:82%"></div><div class="nl-line" style="width:60%"></div></div>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-metrics">1,165 Sent &nbsp;·&nbsp; 49.7% Opened &nbsp;·&nbsp; 1.37% Clicked</p>
-         </div>
-       </div>
-       <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=40620446-fa36-11ef-81d2-fb9a6fac7f9d&pt=campaign&t=1741387515&s=4ee06cd5db2a78f4935fe16cd6a64297e9323a842d88ef7a36646e9973a75512','_blank')" role="button" tabindex="0" aria-label="View newsletter: Leadership Training">
-         <div class="card-visual">
-           <div class="newsletter-scene">
-             <div class="newsletter-top-bar"></div>
-             <div class="nl-header"><div class="nl-dots"><div class="nl-dot"></div><div class="nl-dot"></div><div class="nl-dot"></div></div><div class="nl-to-line"></div></div>
-             <p class="newsletter-subject">FREE LEADERSHIP TRAINING</p>
-             <div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:70%"></div><div class="nl-line" style="width:50%"></div></div>
-           </div>
-         </div>
-         <div class="card-meta">
-           <p class="card-metrics">674 Sent &nbsp;·&nbsp; 64.1% Opened &nbsp;·&nbsp; 5.93% Clicked</p>
-         </div>
-       </div>
-     </div>
-   </div>
+  <!-- ══ NEWSLETTERS PANEL ══ -->
+  <div id="panel-newsletters" class="panel">
+    <div class="cards-grid-3">
+      <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=8015b190-29ee-11f0-8449-f5c623a97377&pt=campaign&t=1746485666&s=b90299e014521ed6ace4fecc6e3682e4e0922bcffce8f35af4630f79c4cbb72b','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="newsletter-scene"><div class="newsletter-glow"></div><svg class="newsletter-circles" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="80" r="50" fill="rgba(255,255,255,0.04)"/><circle cx="20" cy="80" r="30" fill="rgba(255,255,255,0.04)"/></svg><p class="newsletter-subject">Warming: Sweet Climate Week Pics Included!</p><div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:78%"></div><div class="nl-line" style="width:55%"></div></div></div></div>
+        <div class="card-meta"><p class="card-metrics">998 Sent &nbsp;·&nbsp; 65.1% Opened &nbsp;·&nbsp; 2.51% Clicked</p></div>
+      </div>
+      <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=7e2423ba-8a9e-11f0-863a-71a7ef473c68&pt=campaign&t=1757117901&s=20a09dbd515fa8695192755865ccf4212bbb8c5b489610ddd3ac40b5e5301d44','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="newsletter-scene"><div class="newsletter-glow"></div><svg class="newsletter-circles" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="80" r="50" fill="rgba(255,255,255,0.04)"/><circle cx="20" cy="80" r="30" fill="rgba(255,255,255,0.04)"/></svg><p class="newsletter-subject">Why Hiring Managers Skip Your Portfolio: 2 Common Mistakes</p><div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:82%"></div><div class="nl-line" style="width:60%"></div></div></div></div>
+        <div class="card-meta"><p class="card-metrics">1,165 Sent &nbsp;·&nbsp; 49.7% Opened &nbsp;·&nbsp; 1.37% Clicked</p></div>
+      </div>
+      <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=40620446-fa36-11ef-81d2-fb9a6fac7f9d&pt=campaign&t=1741387515&s=4ee06cd5db2a78f4935fe16cd6a64297e9323a842d88ef7a36646e9973a75512','_blank')" role="button" tabindex="0">
+        <div class="card-visual"><div class="newsletter-scene"><div class="newsletter-glow"></div><svg class="newsletter-circles" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="80" r="50" fill="rgba(255,255,255,0.04)"/><circle cx="20" cy="80" r="30" fill="rgba(255,255,255,0.04)"/></svg><p class="newsletter-subject">FREE LEADERSHIP TRAINING</p><div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:70%"></div><div class="nl-line" style="width:50%"></div></div></div></div>
+        <div class="card-meta"><p class="card-metrics">674 Sent &nbsp;·&nbsp; 64.1% Opened &nbsp;·&nbsp; 5.93% Clicked</p></div>
+      </div>
+    </div>
+  </div>
 
-
-   <!-- Videos -->
-   <div class="cat-block">
-     <div class="cat-label">
-       <span class="cat-name">Videos</span>
-       <span class="cat-divider"></span>
-       <span class="cat-count">4</span>
-     </div>
-     <div class="cards-grid">
-       <div class="project-card card-video" onclick="openVideo('Sustainability Creatives Introductory Video.mp4','Sustainability Creatives: Who We Are','An introductory video for the Sustainability Creatives community — covering who we are, what we do, and why it matters.')" role="button" tabindex="0" aria-label="Play Sustainability Creatives intro video">
-         <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-         <div class="card-meta">
-           <!-- PLACEHOLDER: review this — update title and description -->
-           <p class="card-name">Sustainability Creatives: Who We Are</p>
-           <p class="card-metrics">Brand &nbsp;·&nbsp; Intro</p>
-         </div>
-       </div>
-       <div class="project-card card-video" onclick="openVideo('InterviewProgramTrailer.mp4','Interview Program: Official Trailer','A short trailer spotlighting the Sustainability Creatives Interview Program — designed to help members land sustainability roles.')" role="button" tabindex="0" aria-label="Play Interview Program trailer">
-         <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-         <div class="card-meta">
-           <!-- PLACEHOLDER: review this — update title and description -->
-           <p class="card-name">Interview Program Trailer</p>
-           <p class="card-metrics">Trailer &nbsp;·&nbsp; Series</p>
-         </div>
-       </div>
-       <div class="project-card card-video" onclick="openVideo('InterviewProgramDay1.mp4','Interview Program: Day One','Day one of the Interview Program series — covering foundations, first impressions, and how to tell your sustainability story.')" role="button" tabindex="0" aria-label="Play Interview Program Day 1">
-         <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-         <div class="card-meta">
-           <!-- PLACEHOLDER: review this — update title and description -->
-           <p class="card-name">Interview Program: Day 1</p>
-           <p class="card-metrics">Series &nbsp;·&nbsp; Day 1 of 2</p>
-         </div>
-       </div>
-       <div class="project-card card-video" onclick="openVideo('InterviewProgramDay2.mp4','Interview Program: Day Two','Day two dives into technical interview prep, portfolio walkthroughs, and common pitfalls to avoid.')" role="button" tabindex="0" aria-label="Play Interview Program Day 2">
-         <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-         <div class="card-meta">
-           <!-- PLACEHOLDER: review this — update title and description -->
-           <p class="card-name">Interview Program: Day 2</p>
-           <p class="card-metrics">Series &nbsp;·&nbsp; Day 2 of 2</p>
-         </div>
-       </div>
-     </div>
-   </div>
-
-
- </div><!-- end panel-all -->
-
-
- <!-- ══ LINKEDIN PANEL ══ -->
- <div id="panel-linkedin" class="panel">
-   <div class="cards-grid">
-     <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7307836031729311745/','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:80%"></div><div class="li-line" style="width:60%"></div></div></div></div>
-       <div class="card-meta"><p class="card-name">Blog-style post</p><p class="card-metrics">135 Reactions &nbsp;·&nbsp; 30 Comments</p></div>
-     </div>
-     <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_the-sustainability-creatives-are-excited-activity-7348002884866756608-BbNs','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:75%"></div><div class="li-line" style="width:88%"></div><div class="li-line" style="width:55%"></div></div></div></div>
-       <div class="card-meta"><p class="card-name">Partnered event promotion</p><p class="card-metrics">23 Reactions &nbsp;·&nbsp; 1,097 Impressions &nbsp;·&nbsp; 1 Comment</p></div>
-     </div>
-     <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_laclimateweek-sfclimateweek-activity-7319152269101318144-MatF/','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:90%"></div><div class="li-line" style="width:65%"></div><div class="li-line" style="width:80%"></div></div></div></div>
-       <div class="card-meta"><p class="card-name">SF Climate Week promo</p><p class="card-metrics">23 Reactions &nbsp;·&nbsp; 881 Impressions &nbsp;·&nbsp; 4 Comments</p></div>
-     </div>
-     <div class="project-card card-linkedin" onclick="window.open('https://www.linkedin.com/posts/lila-roginski_welcome-to-the-hub-activity-7313991250997563392-kFnb/','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="linkedin-scene"><div class="linkedin-watermark">in</div><div class="linkedin-profile"><div class="linkedin-avatar"></div><div><div class="linkedin-name-line"></div><div class="linkedin-role-line"></div></div></div><div class="linkedin-text-lines"><div class="li-line"></div><div class="li-line" style="width:88%"></div><div class="li-line" style="width:72%"></div><div class="li-line" style="width:55%"></div></div></div></div>
-       <div class="card-meta"><p class="card-name">Thought piece</p><p class="card-metrics">28 Reactions &nbsp;·&nbsp; 1,086 Impressions &nbsp;·&nbsp; 6 Comments</p></div>
-     </div>
-   </div>
- </div>
-
-
- <!-- ══ EVENTS PANEL ══ -->
- <div id="panel-events" class="panel">
-   <div class="cards-grid">
-     <div class="project-card card-luma" onclick="window.open('https://luma.com/sustainabilitycreatives?k=c','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><rect x="4" y="10" width="44" height="38" rx="6" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/><rect x="14" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/><rect x="34" y="4" width="4" height="12" rx="2" fill="rgba(255,255,255,0.4)"/><rect x="4" y="22" width="44" height="1.2" fill="rgba(255,255,255,0.1)"/><circle cx="15" cy="32" r="3" fill="rgba(160,120,255,0.7)"/><circle cx="26" cy="32" r="3" fill="rgba(160,120,255,0.5)"/><circle cx="37" cy="32" r="3" fill="rgba(160,120,255,0.3)"/><circle cx="15" cy="43" r="3" fill="rgba(160,120,255,0.3)"/><circle cx="26" cy="43" r="3" fill="#E8D84B" opacity="0.85"/><circle cx="37" cy="43" r="3" fill="rgba(160,120,255,0.2)"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">SC Event Calendar</p><p class="card-metrics">1,433 Subscribers &nbsp;·&nbsp; 183 Events &nbsp;·&nbsp; 22 ★ Reviews</p></div>
-     </div>
-     <div class="project-card card-luma" onclick="window.open('https://luma.com/5b2mf1oe','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><circle cx="26" cy="20" r="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/><circle cx="26" cy="18" r="6" fill="rgba(255,255,255,0.18)"/><path d="M10 44 Q10 34 26 34 Q42 34 42 44" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/><circle cx="40" cy="11" r="4" fill="#E8D84B" opacity="0.9"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">Climate Confessional: Charlie Sellars</p><p class="card-metrics">126 Guests</p></div>
-     </div>
-     <div class="project-card card-luma" onclick="window.open('https://luma.com/qwzglyde','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><rect x="10" y="6" width="32" height="40" rx="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/><rect x="16" y="16" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.4)"/><rect x="16" y="23" width="16" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/><rect x="16" y="29" width="18" height="2.5" rx="1.2" fill="rgba(255,255,255,0.2)"/><rect x="16" y="37" width="20" height="6" rx="3" fill="#E8D84B" opacity="0.9"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">Portfolio Tips: Job Switcher Edition</p><p class="card-metrics">62 Guests</p></div>
-     </div>
-     <div class="project-card card-luma" onclick="window.open('https://luma.com/466bqkng','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="luma-scene"><div class="luma-glow"></div><svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1"><circle cx="26" cy="22" r="14" fill="rgba(232,216,75,0.1)" stroke="rgba(232,216,75,0.35)" stroke-width="1.2"/><circle cx="26" cy="20" r="7" fill="rgba(232,216,75,0.22)"/><line x1="20" y1="36" x2="20" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="36" x2="32" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-linecap="round"/><line x1="17" y1="43" x2="35" y2="43" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="12" r="2.5" fill="#E8D84B" opacity="0.65"/><circle cx="41" cy="9" r="2" fill="#E8D84B" opacity="0.45"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">Re-design Jam: Bright Ideas</p><p class="card-metrics">67 Guests</p></div>
-     </div>
-   </div>
- </div>
-
-
- <!-- ══ NEWSLETTERS PANEL ══ -->
- <div id="panel-newsletters" class="panel">
-   <div class="cards-grid-3">
-     <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=8015b190-29ee-11f0-8449-f5c623a97377&pt=campaign&t=1746485666&s=b90299e014521ed6ace4fecc6e3682e4e0922bcffce8f35af4630f79c4cbb72b','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="newsletter-scene"><div class="newsletter-top-bar"></div><div class="nl-header"><div class="nl-dots"><div class="nl-dot"></div><div class="nl-dot"></div><div class="nl-dot"></div></div><div class="nl-to-line"></div></div><p class="newsletter-subject">Warming: Sweet Climate Week Pics Included!</p><div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:78%"></div><div class="nl-line" style="width:55%"></div></div></div></div>
-       <div class="card-meta"><p class="card-metrics">998 Sent &nbsp;·&nbsp; 65.1% Opened &nbsp;·&nbsp; 2.51% Clicked</p></div>
-     </div>
-     <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=7e2423ba-8a9e-11f0-863a-71a7ef473c68&pt=campaign&t=1757117901&s=20a09dbd515fa8695192755865ccf4212bbb8c5b489610ddd3ac40b5e5301d44','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="newsletter-scene"><div class="newsletter-top-bar"></div><div class="nl-header"><div class="nl-dots"><div class="nl-dot"></div><div class="nl-dot"></div><div class="nl-dot"></div></div><div class="nl-to-line"></div></div><p class="newsletter-subject">Why Hiring Managers Skip Your Portfolio: 2 Common Mistakes</p><div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:82%"></div><div class="nl-line" style="width:60%"></div></div></div></div>
-       <div class="card-meta"><p class="card-metrics">1,165 Sent &nbsp;·&nbsp; 49.7% Opened &nbsp;·&nbsp; 1.37% Clicked</p></div>
-     </div>
-     <div class="project-card card-newsletter" onclick="window.open('https://eocampaign1.com/web-version?p=40620446-fa36-11ef-81d2-fb9a6fac7f9d&pt=campaign&t=1741387515&s=4ee06cd5db2a78f4935fe16cd6a64297e9323a842d88ef7a36646e9973a75512','_blank')" role="button" tabindex="0">
-       <div class="card-visual"><div class="newsletter-scene"><div class="newsletter-top-bar"></div><div class="nl-header"><div class="nl-dots"><div class="nl-dot"></div><div class="nl-dot"></div><div class="nl-dot"></div></div><div class="nl-to-line"></div></div><p class="newsletter-subject">FREE LEADERSHIP TRAINING</p><div class="newsletter-lines"><div class="nl-line"></div><div class="nl-line" style="width:70%"></div><div class="nl-line" style="width:50%"></div></div></div></div>
-       <div class="card-meta"><p class="card-metrics">674 Sent &nbsp;·&nbsp; 64.1% Opened &nbsp;·&nbsp; 5.93% Clicked</p></div>
-     </div>
-   </div>
- </div>
-
-
- <!-- ══ VIDEOS PANEL ══ -->
- <div id="panel-videos" class="panel">
-   <div class="cards-grid">
-     <div class="project-card card-video" onclick="openVideo('Sustainability Creatives Introductory Video.mp4','Sustainability Creatives: Who We Are','An introductory video for the Sustainability Creatives community — covering who we are, what we do, and why it matters.')" role="button" tabindex="0">
-       <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">Sustainability Creatives: Who We Are</p><p class="card-metrics">Brand &nbsp;·&nbsp; Intro</p></div>
-     </div>
-     <div class="project-card card-video" onclick="openVideo('InterviewProgramTrailer.mp4','Interview Program: Official Trailer','A short trailer spotlighting the Sustainability Creatives Interview Program — designed to help members land sustainability roles.')" role="button" tabindex="0">
-       <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">Interview Program Trailer</p><p class="card-metrics">Trailer &nbsp;·&nbsp; Series</p></div>
-     </div>
-     <div class="project-card card-video" onclick="openVideo('InterviewProgramDay1.mp4','Interview Program: Day One','Day one of the Interview Program series — covering foundations, first impressions, and how to tell your sustainability story.')" role="button" tabindex="0">
-       <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">Interview Program: Day 1</p><p class="card-metrics">Series &nbsp;·&nbsp; Day 1 of 2</p></div>
-     </div>
-     <div class="project-card card-video" onclick="openVideo('InterviewProgramDay2.mp4','Interview Program: Day Two','Day two dives into technical interview prep, portfolio walkthroughs, and common pitfalls to avoid.')" role="button" tabindex="0">
-       <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
-       <div class="card-meta"><p class="card-name">Interview Program: Day 2</p><p class="card-metrics">Series &nbsp;·&nbsp; Day 2 of 2</p></div>
-     </div>
-   </div>
- </div>
-
+  <!-- ══ VIDEOS PANEL ══ -->
+  <div id="panel-videos" class="panel">
+    <div class="cards-grid">
+      <div class="project-card card-video" onclick="openVideo('Sustainability Creatives Introductory Video.mp4','Sustainability Creatives: Who We Are','An introductory video for the Sustainability Creatives community — covering who we are, what we do, and why it matters.')" role="button" tabindex="0">
+        <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">Sustainability Creatives: Who We Are</p><p class="card-metrics">Brand &nbsp;·&nbsp; Intro</p></div>
+      </div>
+      <div class="project-card card-video" onclick="openVideo('InterviewProgramTrailer.mp4','Interview Program: Official Trailer','A short trailer spotlighting the Sustainability Creatives Interview Program — designed to help members land sustainability roles.')" role="button" tabindex="0">
+        <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">Interview Program Trailer</p><p class="card-metrics">Trailer &nbsp;·&nbsp; Series</p></div>
+      </div>
+      <div class="project-card card-video" onclick="openVideo('InterviewProgramDay1.mp4','Interview Program: Day One','Day one of the Interview Program series — covering foundations, first impressions, and how to tell your sustainability story.')" role="button" tabindex="0">
+        <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">Interview Program: Day 1</p><p class="card-metrics">Series &nbsp;·&nbsp; Day 1 of 2</p></div>
+      </div>
+      <div class="project-card card-video" onclick="openVideo('InterviewProgramDay2.mp4','Interview Program: Day Two','Day two dives into technical interview prep, portfolio walkthroughs, and common pitfalls to avoid.')" role="button" tabindex="0">
+        <div class="card-visual"><div class="video-glow"></div><div class="video-play-btn"><svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="margin-left:3px"><polygon points="3,2 15,9 3,16" fill="#1A1814"/></svg></div></div>
+        <div class="card-meta"><p class="card-name">Interview Program: Day 2</p><p class="card-metrics">Series &nbsp;·&nbsp; Day 2 of 2</p></div>
+      </div>
+    </div>
+  </div>
 
 </section>
-
 
 <!-- ABOUT -->
 <section class="about" id="about">
- <div>
-   <p class="about-label">About me</p>
-   <!-- PLACEHOLDER: review this — update about headline -->
-   <h2 class="about-title">Content that <em>builds</em> communities,<br>not just audiences</h2>
-   <!-- PLACEHOLDER: review this — update bio -->
-   <p class="about-body">
-     I'm Lila Roginski — a business development manager and content creator focused on the sustainability space. Over 18 months at Sustainability Creatives, I've grown newsletter audiences, LinkedIn followings, and a thriving event calendar from the ground up. I believe the best content doesn't just inform — it connects people to something worth caring about.
-   </p>
-   <div class="about-stats">
-     <div>
-       <div class="stat-num">~1,300</div>
-       <div class="stat-label">Newsletter subscribers</div>
-     </div>
-     <div>
-       <div class="stat-num">65+</div>
-       <div class="stat-label">Newsletters sent</div>
-     </div>
-     <div>
-       <div class="stat-num">1,500</div>
-       <div class="stat-label">Luma calendar subs</div>
-     </div>
-   </div>
- </div>
- <div class="skills-list">
-   <div class="skill-item">
-     <div class="skill-icon">✉</div>
-     <div>
-       <div class="skill-name">Newsletter Strategy</div>
-       <div class="skill-desc">Email design, audience growth, campaign analytics</div>
-     </div>
-     <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div>
-   </div>
-   <div class="skill-item">
-     <div class="skill-icon">◈</div>
-     <div>
-       <div class="skill-name">LinkedIn Growth</div>
-       <div class="skill-desc">Content strategy, account management, community</div>
-     </div>
-     <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
-   </div>
-   <div class="skill-item">
-     <div class="skill-icon">▶</div>
-     <div>
-       <div class="skill-name">Video Production</div>
-       <div class="skill-desc">Production coordination, storytelling, editing</div>
-     </div>
-     <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
-   </div>
-   <div class="skill-item">
-     <div class="skill-icon">⬡</div>
-     <div>
-       <div class="skill-name">Event Management</div>
-       <div class="skill-desc">Calendar curation, speaker coordination, Luma</div>
-     </div>
-     <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
-   </div>
- </div>
+  <div>
+    <p class="about-label">About me</p>
+    <!-- PLACEHOLDER: review this — update about headline -->
+    <h2 class="about-title">Content that <em>builds</em> communities,<br>not just audiences</h2>
+    <!-- PLACEHOLDER: review this — update bio -->
+    <p class="about-body">
+      I'm Lila Roginski — a business development manager and content creator focused on the sustainability space. Over 18 months at Sustainability Creatives, I've grown newsletter audiences, LinkedIn followings, and a thriving event calendar from the ground up. I believe the best content doesn't just inform — it connects people to something worth caring about.
+    </p>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">~1,300</div>
+        <div class="stat-label">Newsletter subscribers</div>
+      </div>
+      <div>
+        <div class="stat-num">65+</div>
+        <div class="stat-label">Newsletters sent</div>
+      </div>
+      <div>
+        <div class="stat-num">1,500</div>
+        <div class="stat-label">Luma calendar subs</div>
+      </div>
+    </div>
+  </div>
+  <div class="skills-list">
+    <div class="skill-item">
+      <div class="skill-icon">✉</div>
+      <div>
+        <div class="skill-name">Newsletter Strategy</div>
+        <div class="skill-desc">Email design, audience growth, campaign analytics</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">◈</div>
+      <div>
+        <div class="skill-name">LinkedIn Growth</div>
+        <div class="skill-desc">Content strategy, account management, community</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">▶</div>
+      <div>
+        <div class="skill-name">Video Production</div>
+        <div class="skill-desc">Production coordination, storytelling, editing</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">⬡</div>
+      <div>
+        <div class="skill-name">Event Management</div>
+        <div class="skill-desc">Calendar curation, speaker coordination, Luma</div>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
+    </div>
+  </div>
 </section>
-
 
 <!-- FOOTER -->
 <footer>
- <span class="footer-name">Lila Roginski.</span>
- <span class="footer-copy">© 2026 — All rights reserved</span>
- <div class="footer-links">
-   <a href="https://www.linkedin.com/in/lila-roginski/" target="_blank">LinkedIn</a>
-   <a href="https://luma.com/sustainabilitycreatives?k=c" target="_blank">Luma</a>
-   <!-- PLACEHOLDER: review this — update with Lila's real email -->
-   <a href="mailto:lila@example.com">Email</a>
- </div>
+  <span class="footer-name">Lila Roginski.</span>
+  <span class="footer-copy">© 2026 — All rights reserved</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/lila-roginski/" target="_blank">LinkedIn</a>
+    <a href="https://luma.com/sustainabilitycreatives?k=c" target="_blank">Luma</a>
+    <a href="mailto:lilaclaireroginski@gmail.com">Email</a>
+  </div>
 </footer>
-
 
 <!-- VIDEO MODAL -->
 <div class="modal-overlay" id="video-modal" onclick="handleOverlayClick(event)" role="dialog" aria-modal="true" aria-label="Video player">
- <div class="modal">
-   <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
-   <div class="modal-video-wrap">
-     <video id="modal-video" controls playsinline></video>
-   </div>
-   <div class="modal-video-info">
-     <p class="modal-video-label">Video</p>
-     <h2 class="modal-video-title" id="modal-video-title"></h2>
-     <p class="modal-video-desc" id="modal-video-desc"></p>
-   </div>
- </div>
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <div class="modal-video-wrap">
+      <video id="modal-video" controls playsinline></video>
+    </div>
+    <div class="modal-video-info">
+      <p class="modal-video-label">Video</p>
+      <h2 class="modal-video-title" id="modal-video-title"></h2>
+      <p class="modal-video-desc" id="modal-video-desc"></p>
+    </div>
+  </div>
 </div>
 
-
 <script>
- function switchTab(id, el) {
-   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-   el.classList.add('active');
-   document.getElementById('panel-' + id).classList.add('active');
- }
+  function switchTab(id, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+  }
 
+  function openVideo(filename, title, desc) {
+    const modal = document.getElementById('video-modal');
+    const video = document.getElementById('modal-video');
+    video.src = './videos/' + filename;
+    document.getElementById('modal-video-title').textContent = title;
+    document.getElementById('modal-video-desc').textContent = desc || '';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    video.play().catch(() => {});
+  }
 
- function openVideo(filename, title, desc) {
-   const modal = document.getElementById('video-modal');
-   const video = document.getElementById('modal-video');
-   video.src = './videos/' + filename;
-   document.getElementById('modal-video-title').textContent = title;
-   document.getElementById('modal-video-desc').textContent = desc || '';
-   modal.classList.add('open');
-   document.body.style.overflow = 'hidden';
-   video.play().catch(() => {});
- }
+  function closeModal() {
+    const video = document.getElementById('modal-video');
+    if (video) { video.pause(); video.src = ''; }
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
 
+  function handleOverlayClick(e) {
+    if (e.target === e.currentTarget) closeModal();
+  }
 
- function closeModal() {
-   const video = document.getElementById('modal-video');
-   if (video) { video.pause(); video.src = ''; }
-   document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
-   document.body.style.overflow = '';
- }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-
- function handleOverlayClick(e) {
-   if (e.target === e.currentTarget) closeModal();
- }
-
-
- document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-
- document.querySelectorAll('.project-card[tabindex]').forEach(card => {
-   card.addEventListener('keydown', e => {
-     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
-   });
- });
+  document.querySelectorAll('.project-card[tabindex]').forEach(card => {
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
 </script>
 </body>
 </html>
-
-
-
