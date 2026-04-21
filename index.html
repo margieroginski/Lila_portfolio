@@ -325,7 +325,12 @@
 
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
-    .hero-photo { display: none; }
+ /*   .hero-photo { display: none; } */
+    .hero-photo {
+      position: relative; top: auto; right: auto; transform: none;
+      width: 160px; height: 160px; min-width: 0; min-height: 0;
+      margin: 0 auto 2rem auto;
+    }
     .cards-grid { grid-template-columns: repeat(2, 1fr); }
     .cards-grid-3 { grid-template-columns: repeat(2, 1fr); }
     .about { grid-template-columns: 1fr; }
