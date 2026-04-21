@@ -17,8 +17,7 @@
     --white: #FFFFFF;
   }
 
-  html { scroll-behavior: smooth; overflow-x: hidden; }
-
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'DM Sans', sans-serif;
@@ -26,6 +25,7 @@
     color: var(--ink);
     overflow-x: hidden;
   }
+  html { overflow-x: hidden; }
 
   /* ── NAV ── */
   nav {
@@ -53,6 +53,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 0;
     position: relative;
+    clip-path: inset(0 -600px 0 0);
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
